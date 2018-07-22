@@ -8,7 +8,7 @@ import { List, ListItem } from "../../components/List";
 import { Input, TextArea, FormBtn } from "../../components/Form";
 import './login.css';
 
-const bgImg = '/images/FrenderAmp.png';
+const bgImg = '/images/frenderAmp-large.png';
 const divStyle = {
   backgroundImage: 'url(' + bgImg + ')',
 };
