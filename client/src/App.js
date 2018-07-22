@@ -6,9 +6,13 @@ import NoMatch from "./pages/NoMatch";
 import Nav from "./components/Nav";
 import Login from "./pages/Login";
 
+const colorStyle = {
+  backgroundColor: "black",
+}
+
 const App = () => (
   <Router>
-    <div>
+    <div style={colorStyle}>
       <Nav />
       <Switch>
         <Route exact path="/" component={Login} />

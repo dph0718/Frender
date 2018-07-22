@@ -4,12 +4,11 @@ import "./ampswitch.css";
 const switchOn = '/images/switch-on.png';
 const switchOff = '/images/switch-off.png';
 
-
-
 class AmpSwitch extends Component {
   state = {
     on: true
   }
+
   flick = () => {
     let on = this.state.on;
     this.setState({ on: !on })
@@ -18,14 +17,15 @@ class AmpSwitch extends Component {
   render() {
 
     let button;
+    let logLabel;
 
     if (this.state.on) {
       button = switchOn;
+      logLabel= "Logout";
     } else {
+      logLabel= "Login";
       button = switchOff;
     }
-
-
 
     return (
       <div className="knobAndLabel"
@@ -33,7 +33,7 @@ class AmpSwitch extends Component {
         <div className="ampKnob clickable">
           <img className="nums" src={button} />
         </div>
-        <p>{this.props.label}</p>
+        <p>{logLabel}</p>
       </div>
     )
   }

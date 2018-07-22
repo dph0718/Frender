@@ -11,8 +11,13 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-around;
 }
 
-.knobAndLabel {
-  margin: 20px;
+.knobAndLabel p{
+  margin-bottom: 0;
 }
+
+/* .knobAndLabel {
+  margin: 20px;
+} */
