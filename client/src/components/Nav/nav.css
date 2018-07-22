@@ -2,3 +2,18 @@
     width: 100px;
     height: 100px;
 }
+
+.navbar {
+    background-color: black;
+    background-image: url('/images/brushedgold.png');
+    background-size: 100% 100%;
+    display: flex;
+    justify-content: space-around;
+    border: 8px black solid;
+    box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.5) inset;
+    border-radius: 16px;
+}
+
+.clickable:hover {
+    cursor: pointer;
+}
