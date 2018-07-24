@@ -5,6 +5,7 @@ import API from "../../utils/API";
 import { Link } from "react-router-dom";
 import './searchresults.css';
 import PlayerCard from "../../components/PlayerCard/PlayerCard";
+import PlayerInfo from "../../components/PlayerInfo/PlayerInfo";
 
 const bgImg = '/images/frenderAmp-small.png';
 const divStyle = {
@@ -19,6 +20,7 @@ class SearchResults extends Component {
       <div className="fullPage"
         style={divStyle}>
         <PlayerCard />
+        <PlayerInfo />
       </div>
     );
   }
