@@ -18,11 +18,18 @@ class PlayerInfo extends Component {
     const genreArray = ['rock', 'folk'];
     const influenceArray = ['Talking Heads', 'Naz', 'Waylon Jennings'];
     const endeavour = 2;
+    const addInfo = "I'd like to win a few more Grammys. Two isn't enough."
+    const rating = 4;
 
-    //render stars for user's experience
+    //render stars for user's skill level
     let starray = []
+    let star = String.fromCharCode(0x2606);
     for (let i = 0; i < experience; i++) {
-      starray.push(String.fromCharCode(0x2606))
+      starray.push(star)
+    };
+    let rateArray = [];
+    for (let i = 0; i < experience; i++) {
+      rateArray.push(star)
     };
 
     //some code for making the arrays readable.
@@ -46,10 +53,13 @@ class PlayerInfo extends Component {
     return (
       <div className="playerInfo">
         <p className="infoBit"><strong>Experience:</strong> {starray}</p>
+        <p className="infoBit"><strong>Rating:</strong> {rateArray}</p>
         <p className="infoBit"><strong>Instruments:</strong> {instruments}</p>
         <p className="infoBit"><strong>Genres:</strong> {genres}</p>
         <p className="infoBit"><strong>Influences:</strong> {influences}</p>
         <p className="infoBit"><strong>Creative Endeavors:</strong> {endeavor}</p>
+        <p className="infoBit"><strong>Additional Info:</strong> {addInfo}</p>
+
       </div>
     )
   }
