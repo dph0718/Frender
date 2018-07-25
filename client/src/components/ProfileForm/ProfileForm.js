@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import "./profileform.css";
 import ArrayInput from "./ArrayInput.js";
+import API from "../../utils/API";
+
 
 const bgImg = '/images/frenderAmp-small.png';
 const divStyle = {
@@ -27,16 +29,23 @@ class ProfileForm extends Component {
     // Set the state for the appropriate input field
     this.setState({
       [name]: value
+    }, () => {
+      console.log(this.state);
     });
     console.log('here I come instruments', this.state.instruments)
     console.log('here I come firstname', this.state.firstName)
   };
 
 
+  componentDidMount(){
+    API.getUser
+  }
+  //here we gotta post this stuff to the user's document
   handleFormSubmit = event => {
-    console.log('ok');
+
   };
 
+  //collects the arrays of inputs from the state of the children <ArrayInput /> components
   gimmeDat = (theState, name) => {
     console.log('logging theState:', theState);
     console.log('log the name:', name);
@@ -44,6 +53,7 @@ class ProfileForm extends Component {
       [name]: theState,
     })
   }
+
   render() {
     return (
       <form
@@ -88,8 +98,8 @@ class ProfileForm extends Component {
             formTitle="Your influences:"
             ex0='E.g., The Wiggles'
             ex1='Jesse and the Rippers'
-            ex2='Spinal Tap'
-            placeholder="You know you wanna put Barenaked Ladies." />
+            ex2='Wyld Stallyns'
+            placeholder="Duke Silver" />
 
           <ArrayInput
             statename="genres"
@@ -102,7 +112,7 @@ class ProfileForm extends Component {
             placeholder="You sure you're not spreading yourself thin?" />
 
           <p>Creative endeavors</p>
-          <select>
+          <select name="endeavors">
             <option name="endeavors" value="0">I just want to write music.</option>
             <option name="endeavors" value="1">I want to play some covers.</option>
             <option name="endeavors" value="2">Let's just see what happens...</option>

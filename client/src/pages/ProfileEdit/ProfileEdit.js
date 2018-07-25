@@ -12,7 +12,7 @@ const divStyle = {
   backgroundImage: 'url(' + bgImg + ')',
 };
 
-class SearchResults extends Component {
+class ProfileEdit extends Component {
 
   render() {
     return (
@@ -24,4 +24,4 @@ class SearchResults extends Component {
       }
     }
     
-    export default SearchResults;
+    export default ProfileEdit;
