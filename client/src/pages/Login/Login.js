@@ -15,27 +15,43 @@ const divStyle = {
 
 class Login extends Component {
   state = {
-    books: [],
-    title: "",
-    author: "",
-    synopsis: ""
+    email: "",
+    password: "",
   };
+
+  //sends a post method to create user.
+  signUp = (e) => {
+    e.preventDefault();
+    console.log('at least here');
+    API.createUser(
+      {
+        firstName: "Dravon",
+      }
+    );
+  };
+
+  dummyMethod = () => {
+    console.log('dummy method called from click');
+    API.dummyMethod();
+  }
 
   render() {
     return (
       <div className="fullPage"
-      style={divStyle}>
-      <form>
-        <h2>Login</h2>
-        <h2>Username</h2>
-        <input type='text' id='username' placeholder="username" />
-        <h2>Password</h2>
-        <input type='password' id='password' placeholder="password" />
-        <p>or
+        style={divStyle}>
+        <form>
+          <h2>Login</h2>
+          <h2>Username</h2>
+          <input type='text' id='username' placeholder="username" />
+          <h2>Password</h2>
+          <input type='password' id='password' placeholder="password" />
+          <p
+          onClick={this.dummyMethod}>or
         <a href="#">sign up.</a>
-        </p>
-        <button type='submit'>Namaste</button>
-      </form>
+          </p>
+          <button type='submit'
+            onClick={this.signUp}>Namaste</button>
+        </form>
       </div>
     );
   }
