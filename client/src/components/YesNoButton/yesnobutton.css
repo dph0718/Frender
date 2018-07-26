@@ -1,0 +1,12 @@
+.buttonImage {
+  height: 80px;
+  width: 80px;
+}
+
+.yesNoButton {
+  text-align: center;
+}
+
+.buttonImage:hover {
+  box-shadow: 0px 0px 8px white;
+}

@@ -12,6 +12,9 @@ const bgImg = '/images/frenderAmp-large.png';
 const divStyle = {
   backgroundImage: 'url(' + bgImg + ')',
 };
+const formStyle = {
+  backgroundImage: 'url(' + '/images/backstagepass.png' + ')',
+}
 
 class Login extends Component {
   state = {
@@ -57,22 +60,23 @@ class Login extends Component {
     return (
       <div className="fullPage"
         style={divStyle}>
-        <form
-          onChange={this.handleInputChange}>
-          <h2>Login</h2>
-          <h2>Username</h2>
-          <input type='text' name='email' id='email' placeholder="username" />
-          <h2>Password</h2>
-          <input type='password' name='password' id='password' placeholder="password" />
-          <p
-            onClick={this.dummyMethod}>or
-        <a href="#">sign up.</a>
-          </p>
-          <button type='submit'
-            onClick={this.signUp}>Sign Up</button>
-          <button type='submit'
-            onClick={this.logIn}>Log In</button>
-        </form>
+        <div id='loginForm' style={formStyle}>
+          <form
+            onChange={this.handleInputChange}>
+            <h2>Login</h2>
+            <h3>Email</h3>
+            <input type='text' name='email' id='email' placeholder="email" />
+            <h3>Password</h3>
+            <input type='password' name='password' id='password' placeholder="password" />
+            <p
+              onClick={this.dummyMethod}>or
+        <a href="#"
+        onClick={this.signUp}> sign up.</a>
+            </p>
+            <button type='submit'
+              onClick={this.logIn}>Log In</button>
+          </form>
+        </div>
       </div>
     );
   }

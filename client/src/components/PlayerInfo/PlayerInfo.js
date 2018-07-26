@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./playerinfo.css";
+import YesNoButton from "../YesNoButton/YesNoButton";
 
 //takes the arrays and makes them readable.
 const sentencify = (arr) => {
@@ -8,38 +9,73 @@ const sentencify = (arr) => {
   return listSent;
 }
 
-class PlayerInfo extends Component {
 
+
+const yesButton = "/images/lesdudis.png";
+const noButton = "/images/notmyjam.png";
+
+class PlayerInfo extends Component {
+  state = this.props.prevState;
+
+  // {
+  //   experience: 4,
+  //   instrumentArray: ['guitar', 'mandolin', 'kazoo'],
+  //   genreArray: ['rock', 'folk'],
+  //   influenceArray: ['Talking Heads', 'Naz', 'Waylon Jennings'],
+  //   endeavour: 2,
+  //   addInfo: "I'd like to win a few more Grammys. Two isn't enough.",
+  //   rating: 4,
+  // }
+
+  // nextPlayer = () => {
+  //   this.setState(
+  //     {
+  //       experience: 3,
+  //       instrumentArray: ['guitar', 'triangle', 'spoons'],
+  //       genreArray: ['rock', 'showtunes'],
+  //       influenceArray: ['Pearl Jam', 'Elton John', 'Barry Manilow'],
+  //       endeavour: 0,
+  //       addInfo: "Even with 3 fingers, I can outplay Jason Mraz.",
+  //       rating: 3,
+  //     }
+  //   );
+  // }
+
+  doClick = () => {
+    this.props.click();
+    this.setState(this.props.prevState);
+    this.forceUpdate();
+  }
   render() {
 
     //pass in props on each iteration to define the variables:
-    const experience = 4;
-    const instrumentArray = ['guitar', 'mandolin', 'kazoo'];
-    const genreArray = ['rock', 'folk'];
-    const influenceArray = ['Talking Heads', 'Naz', 'Waylon Jennings'];
-    const endeavour = 2;
-    const addInfo = "I'd like to win a few more Grammys. Two isn't enough."
-    const rating = 4;
+    // let experience = 4;
+    // let instrumentArray = ['guitar', 'mandolin', 'kazoo'];
+    // let genreArray = ['rock', 'folk'];
+    // let influenceArray = ['Talking Heads', 'Naz', 'Waylon Jennings'];
+    // let endeavour = 2;
+    // let addInfo = "I'd like to win a few more Grammys. Two isn't enough."
+    // let rating = 4;
 
     //render stars for user's skill level
     let starray = []
-    let star = String.fromCharCode(0x2606);
-    for (let i = 0; i < experience; i++) {
+    let star = String.fromCharCode(0x2605);
+    for (let i = 0; i <= this.state.experience; i++) {
       starray.push(star)
     };
     let rateArray = [];
-    for (let i = 0; i < experience; i++) {
+    for (let i = 0; i <= this.state.rating; i++) {
       rateArray.push(star)
     };
 
     //some code for making the arrays readable.
-    const instruments = sentencify(instrumentArray);
-    const genres = sentencify(genreArray);
-    const influences = sentencify(influenceArray);
+    const instruments = sentencify(this.state.instrumentArray);
+    const genres = sentencify(this.state.genreArray);
+    const influences = sentencify(this.state.influenceArray);
 
     //translate the endeavor to something readable.
     let endeavor;
-    switch (endeavour) {
+    switch (this.state.endeavour) {
       case 0: endeavor = "Write music.";
         break;
       case 1: endeavor = "Do covers.";
@@ -52,13 +88,23 @@ class PlayerInfo extends Component {
     //, or average their skill ratings by other players.
     return (
       <div className="playerInfo">
-        <p className="infoBit"><strong>Experience:</strong> {starray}</p>
-        <p className="infoBit"><strong>Rating:</strong> {rateArray}</p>
+        <p className="infoBit"><strong>Experience:</strong> <span className="starz"> {starray} </span></p>
+        <p className="infoBit"><strong>Rating:</strong> <span className="starz"> {rateArray} </span></p>
         <p className="infoBit"><strong>Instruments:</strong> {instruments}</p>
         <p className="infoBit"><strong>Genres:</strong> {genres}</p>
         <p className="infoBit"><strong>Influences:</strong> {influences}</p>
         <p className="infoBit"><strong>Creative Endeavors:</strong> {endeavor}</p>
-        <p className="infoBit"><strong>Additional Info:</strong> {addInfo}</p>
+        <p className="infoBit"><strong>Additional Info:</strong> {this.state.addInfo}</p>
+        <div className='yesNoButtonBox'>
+          <YesNoButton
+            image={noButton}
+            label="Not my jam"
+            click={this.doClick} />
+          <YesNoButton
+            image={yesButton}
+            label="Les Dudis"
+          />
+        </div>
 
       </div>
     )

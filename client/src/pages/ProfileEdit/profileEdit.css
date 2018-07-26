@@ -4,3 +4,14 @@
     background-image: 'url(/images/FrenderAmp.png)';
     background-size: 100% 100%;
 }
+
+/* .profileEditor {
+    width: 100%;
+    height: inherit;
+    position: absolute;
+    top: 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    padding: 15%;
+  } */

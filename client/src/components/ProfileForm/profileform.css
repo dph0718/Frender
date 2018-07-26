@@ -1,8 +1,23 @@
 
-.playerCard {
+#profileForm {
+  position: relative;
+  border: 8px gray solid;
+  width: 38vw;
+  height: 400px;
+  top: 28px;
+  padding: 20px;
   text-align: center;
+  background-color: rgba(68, 232, 182, 0.5);
+  box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.5);
+   overflow-y: scroll;
+}
+
+.profileEditor {
+  width: 100%;
+  height: inherit;
+  position: relative;
+  top: 0;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: space-around;
+  align-items: flex-start;
 }

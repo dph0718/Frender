@@ -6,3 +6,13 @@
   align-items: center;
   justify-content: space-around;
 }
+
+.yesNoButtonBox{
+  display: flex;
+  justify-content: space-around;
+}
+
+.starz {
+  font-size: 2em;
+  color: gold;
+}

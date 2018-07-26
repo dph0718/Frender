@@ -1,6 +1,28 @@
-.fullPage {
+/* .fullPage {
     width: 100vw;
     height: 75vw;
     background-image: 'url(/images/FrenderAmp.png)';
     background-size: 100% 100%;
+} */
+
+.fullPage {
+    display: flex;
+    justify-content: center;
+}
+.infoContainer {
+    display: flex;
+    align-items: flex-start;
+    position: relative;
+    right: 40px;
+    top: 20px;
+    width: 60vw;
+    height: 700px;
+    border: 8px gray solid;
+    padding: 20px;
+    background-color: rgba(68, 232, 182, 0.5);
+    box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.5);
+}
+
+.infoContainer div{
+    margin: 20px;
 }

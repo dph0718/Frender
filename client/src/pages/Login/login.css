@@ -1,6 +1,23 @@
 .fullPage {
-    width: 100vw;
+    width: 98vw;
     height: 75vw;
     background-image: 'url(/images/FrenderAmp.png)';
     background-size: 100% 100%;
+}
+
+#loginForm {
+    height: 40vw;
+    width: 20vw;
+    position: absolute;
+    right: 20vw;
+    top: 0;
+    background-image: 'url(/images/backstagepass.png)';
+    background-size: 100% 100%;
+    background-position: center;
+}
+
+form {
+    position: relative;
+    top: 40%;
+    left: 15%;
 }

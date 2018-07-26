@@ -40,7 +40,7 @@ class ProfileForm extends Component {
   componentDidMount(){
     API.getUser
   }
-  //here we gotta post this stuff to the user's document
+  //here we gotta post this stuff to the user's mongodb document
   handleFormSubmit = event => {
 
   };
@@ -56,23 +56,25 @@ class ProfileForm extends Component {
 
   render() {
     return (
+      <div class='profileEditor'>
       <form
+      id='profileForm'
         onChange={this.handleInputChange}>
-        <div className="fullPage"
-          style={divStyle}>
 
-          <h2> The World is Your Stage,</h2>
+
+          <h1> The World is Your Stage,</h1>
           <h3>Or something profound like that.</h3>
-          <p>First Name</p>
+
+          <h3>First Name</h3>
           <input statename="firstName" name="firstName" type='text' />
 
-          <p>Last Name</p>
+          <h3>Last Name</h3>
           <input name="lastName" type='text' />
 
-          <p>Email</p>
+          <h3>Email</h3>
           <input name="email" type='text' />
 
-          <p>Your experience level</p>
+          <h3>Your experience level</h3>
           <select name="experience">
             <option name="experience" value="0">I'm awful, but I'm trying.</option>
             <option name="experience" value="1">I'm ... Ok?</option>
@@ -111,19 +113,19 @@ class ProfileForm extends Component {
             ex2="80's television theme songs"
             placeholder="You sure you're not spreading yourself thin?" />
 
-          <p>Creative endeavors</p>
+          <h3>Creative endeavors</h3>
           <select name="endeavors">
             <option name="endeavors" value="0">I just want to write music.</option>
             <option name="endeavors" value="1">I want to play some covers.</option>
             <option name="endeavors" value="2">Let's just see what happens...</option>
           </select>
 
-          <p>Anything else?</p>
+          <h3>Anything else?</h3>
           <textarea name='etCetera'></textarea>
-        </div>
         <button type='submit'
           onClick={this.handleFormSubmit}>Create Profile</button>
       </form>
+      </div>
     );
   }
 }
