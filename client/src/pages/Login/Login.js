@@ -23,11 +23,23 @@ class Login extends Component {
   signUp = (e) => {
     e.preventDefault();
     console.log('at least here');
-    API.createUser(
-      {
-        firstName: "Dravon",
-      }
+    API.createUser(this.state
+      // {
+      //   firstName: "Dravon",
+      //   password: "Telemundo",
+      // }
     );
+  };
+
+  handleInputChange = event => {
+    // Pull the name and value properties off of the event.target (the element which triggered the event)
+    const { name, value } = event.target;
+    // Set the state for the appropriate input field
+    this.setState({
+      [name]: value
+    }, () => {
+      console.log('tha state during input change:', this.state);
+    });
   };
 
   dummyMethod = () => {
@@ -39,12 +51,13 @@ class Login extends Component {
     return (
       <div className="fullPage"
         style={divStyle}>
-        <form>
+        <form
+        onChange={this.handleInputChange}>
           <h2>Login</h2>
           <h2>Username</h2>
-          <input type='text' id='username' placeholder="username" />
+          <input type='text' name='email' id='username' placeholder="username" />
           <h2>Password</h2>
-          <input type='password' id='password' placeholder="password" />
+          <input type='password' name='password' id='password' placeholder="password" />
           <p
           onClick={this.dummyMethod}>or
         <a href="#">sign up.</a>
