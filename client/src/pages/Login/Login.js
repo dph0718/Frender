@@ -31,6 +31,12 @@ class Login extends Component {
     );
   };
 
+  logIn = (event) => {
+    event.preventDefault();
+    console.log('login page state:', this.state);
+    API.logInUser(this.state);
+  }
+
   handleInputChange = event => {
     // Pull the name and value properties off of the event.target (the element which triggered the event)
     const { name, value } = event.target;
@@ -52,18 +58,20 @@ class Login extends Component {
       <div className="fullPage"
         style={divStyle}>
         <form
-        onChange={this.handleInputChange}>
+          onChange={this.handleInputChange}>
           <h2>Login</h2>
           <h2>Username</h2>
-          <input type='text' name='email' id='username' placeholder="username" />
+          <input type='text' name='email' id='email' placeholder="username" />
           <h2>Password</h2>
           <input type='password' name='password' id='password' placeholder="password" />
           <p
-          onClick={this.dummyMethod}>or
+            onClick={this.dummyMethod}>or
         <a href="#">sign up.</a>
           </p>
           <button type='submit'
-            onClick={this.signUp}>Namaste</button>
+            onClick={this.signUp}>Sign Up</button>
+          <button type='submit'
+            onClick={this.logIn}>Log In</button>
         </form>
       </div>
     );

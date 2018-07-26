@@ -4,7 +4,6 @@ const db = require("../models");
 module.exports = {
   create: function (req, res) {
     console.log('inside the create function......!')
-    console.log('db:', db)
     db.User
       .create(req.body)
       .then(dbModel => res.json(dbModel))

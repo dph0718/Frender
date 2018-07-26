@@ -16,6 +16,14 @@ export default {
       });
   },
 
+  logInUser: function (data) {
+    console.log('attempting login from API...with :', data);
+    return axios.post('/api/users/login', data)
+    .then(res=>{
+      console.log('res from loginUser from API:', res)
+    })
+  },
+
   dummyMethod: hm => {
     console.log('dummy method!');
     console.log(hm);
