@@ -56,7 +56,7 @@ class ProfileForm extends Component {
 
   render() {
     return (
-      <div class='profileEditor'>
+      <div className='profileEditor'>
       <form
       id='profileForm'
         onChange={this.handleInputChange}>

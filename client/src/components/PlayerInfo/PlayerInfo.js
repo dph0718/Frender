@@ -42,6 +42,7 @@ class PlayerInfo extends Component {
   // }
 
   doClick = () => {
+    console.log('player info.js onClick method.')
     this.props.click();
     this.setState(this.props.prevState);
     this.forceUpdate();

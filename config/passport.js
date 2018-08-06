@@ -13,17 +13,13 @@ passport.use(new LocalStrategy(
   //   email: "email"
   // },
   function (username, password, done) {
-    console.log('findOne in the db is next:');
     // When a user tries to sign in this code runs
     db.User.findOne({
-
       email: username
-
     }).then(function (dbUser) {
-      console.log('findOne was successfullish for:', username, password, dbUser);
       // If there's no user with the given email
       if (!dbUser) {
-        console.log('maybe not...');
+        console.log('maybe not...')
         return done(null, false, {
           message: "Incorrect email."
         });
@@ -36,7 +32,7 @@ passport.use(new LocalStrategy(
         });
       }
       // If none of the above, return the user
-      console.log('at the end of local strategy.. ', username, password);
+      console.log('Within LocalStrategy; login was successful for:', username, 'using:', password);
       return done(null, dbUser);
     });
   }

@@ -18,7 +18,7 @@ class SearchResults extends Component {
     name: "Stick Man",
     experience: 4,
     instrumentArray: ['guitar', 'mandolin', 'kazoo'],
-    genreArray: ['rock', 'folk'],
+    genreArray: ['rock', 'folk', 'monster ballads'],
     influenceArray: ['Talking Heads', 'Naz', 'Waylon Jennings'],
     endeavour: 2,
     addInfo: "I'd like to win a few more Grammys. Two isn't enough.",
@@ -26,6 +26,7 @@ class SearchResults extends Component {
   }
 
   nextPlayer = () => {
+    console.log("before:", this.state);
     this.setState(
       {
         image: "/images/guitarist.png",
@@ -37,9 +38,12 @@ class SearchResults extends Component {
         endeavour: 0,
         addInfo: "Even with 3 fingers, I can outplay Jason Mraz.",
         rating: 3,
+      }, () => {
+        this.forceUpdate();
+        console.log();
+        console.log('after: the async callback.:', this.state);
       }
     );
-    this.forceUpdate();
   }
   render() {
     return (

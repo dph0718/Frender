@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import "./ampswitch.css";
+import { Link } from "react-router-dom";
+
+import API from '../../utils/API'
 
 const switchOn = '/images/switch-on.png';
 const switchOff = '/images/switch-off.png';
@@ -21,20 +24,20 @@ class AmpSwitch extends Component {
 
     if (this.state.on) {
       button = switchOn;
-      logLabel= "Logout";
+      logLabel = "Logout";
     } else {
-      logLabel= "Login";
+      logLabel = "Login";
       button = switchOff;
     }
 
     return (
-      <div className="knobAndLabel"
-        onClick={this.flick}>
-        <div className="ampKnob clickable">
-          <img className="nums" src={button} />
+      <div className="knobAndLabel">
+          {/* onClick={this.flick}> */}
+          <div className="ampKnob clickable">
+            <img className="nums" src={button} />
+          </div>
+          <p>{logLabel}</p>
         </div>
-        <p>{logLabel}</p>
-      </div>
     )
   }
 }
