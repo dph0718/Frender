@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import "./profileform.css";
 import ArrayInput from "./ArrayInput.js";
-import API from "../../utils/API";
+// import API from "../../utils/API";
 
 
-const bgImg = '/images/frenderAmp-small.png';
-const divStyle = {
-  backgroundImage: 'url(' + bgImg + ')',
-};
+// const bgImg = '/images/frenderAmp-small.png';
+// const divStyle = {
+//   backgroundImage: 'url(' + bgImg + ')',
+// };
 class ProfileForm extends Component {
   state = {
     firstName: "",
@@ -37,9 +37,10 @@ class ProfileForm extends Component {
   };
 
 
-  componentDidMount(){
-    API.getUser
-  }
+  // componentDidMount(){
+  //   API.getUser
+  // }
+
   //here we gotta post this stuff to the user's mongodb document
   handleFormSubmit = event => {
 

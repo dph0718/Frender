@@ -5,7 +5,11 @@ const passport = require("../../config/passport");
 
 
 router.get('/', (req, res) => {
-  res.json('i think you got it.');
+  if (!req.user) {
+    res.send(false)
+  } else {
+    res.send(true);
+  }
 });
 
 // router.post('/login', passport.authenticate("local"), function (req, res) {
@@ -33,14 +37,19 @@ router.post('/login', passport.authenticate("local"),
     // Since we're doing a POST with javascript, we can't actually redirect that post into a GET request
     // So we're sending the user back the route to the members page because the redirect will happen on the front end
     // They won't get this or even be able to access this page if they aren't authed
-  
+
     //BTW: res.redirect performs a GET request to whatever other route you tell it. 
     // res.redirect(`/home`);
     // res.json(`${req.user}`)
 
-    //gonna comment this out while I figure out what's going on with the "req's"
+    // Send an object that contains both the route to redirect to, and 
     res.json(`/home`);
   });
+
+router.post('/logout', (req, res) => {
+  req.logout();
+  res.send('/');
+})
 
 router.post('/', userController.create);
 // router.post('/', (req, res) => {

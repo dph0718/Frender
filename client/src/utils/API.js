@@ -1,10 +1,6 @@
 import axios from "axios";
 
 export default {
-  // Gets all books
-  getBooks: function () {
-    return axios.get("/api/books");
-  },
 
   //creates a user
   createUser: function (data) {
@@ -16,6 +12,7 @@ export default {
       });
   },
 
+  //logs in user
   logInUser: function (data) {
     console.log('attempting login from API...with :', data);
     return axios.post('/api/users/login', data)
@@ -32,6 +29,12 @@ export default {
       })
   },
 
+  logoutUser: () => {
+    return axios.post('/api/users/logout').then(res => {
+      console.log('res should be "/"', res)
+    })
+  },
+
   homeMethod: (component) => {
     console.log('homeMethod');
     return axios.get('/home').then(res => {
@@ -43,6 +46,12 @@ export default {
     })
   },
 
+  doesUserExist: () => {
+    return axios.get('/api/users')
+      .then(res => {
+        return (res.data);
+      })
+  },
 
   // Gets the user with the given id
   getUser: function (id) {

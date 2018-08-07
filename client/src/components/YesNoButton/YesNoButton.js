@@ -11,7 +11,7 @@ class YesNoButton extends Component {
       <div className="yesNoButton">
         <div className="clickable"
         onClick={this.props.click}>
-          <img className="buttonImage" src={image} />
+          <img className="buttonImage" alt="button" src={image} />
         </div>
         <h3>{label}</h3>
       </div>

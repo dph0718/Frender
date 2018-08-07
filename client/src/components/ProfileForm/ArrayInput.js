@@ -13,7 +13,7 @@ class ArrayInput extends Component {
   handleInputChange = event => {
     let storedArray = this.state.array;
     const { name, value } = event.target;
-    let nimba = parseInt(name);
+    let nimba = parseInt(name, 10);
     storedArray[nimba] = value;
     this.setState({
       array: storedArray,

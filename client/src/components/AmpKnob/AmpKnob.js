@@ -13,8 +13,8 @@ class AmpKnob extends Component {
     return (
       <div className="knobAndLabel">
         <div className="ampKnob clickable">
-          <img className="nums" src={ampNums} />
-          <img className="knob" src={ampKnob} />
+          <img className="nums" alt="knob numbers" src={ampNums} />
+          <img className="knob" alt="amp knob" src={ampKnob} />
         </div>
         <p>{this.props.label}</p>
       </div>

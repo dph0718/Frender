@@ -83,6 +83,7 @@ class PlayerInfo extends Component {
         break;
       case 2: endeavor = "Just see what happens.";
         break;
+        default: endeavor = "For some reason, there isn't any aspiration at all here."
     }
 
     //put a truth meter somewhere in here too, so people can rate other musicians on their honesty about skill level

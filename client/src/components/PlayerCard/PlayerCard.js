@@ -12,7 +12,7 @@ class PlayerCard extends Component {
     return (
       <div className="playerCard">
         <h2 className="playerName">{tempName}</h2>
-        <img className="playerPic" src={tempImage} />
+        <img className="playerPic" alt="the user" src={tempImage} />
       </div>
     )
   }
