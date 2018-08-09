@@ -18,21 +18,21 @@ class Login extends Component {
     loggedIn: this.props.loggedIn
   };
 
-  componentDidMount() {
-    console.log('Login Mounted', this.state.loggedIn);
-    // API.htmlRoute();
-    API.doesUserExist().then(res => {
-      if (res) {
-        console.log('Login mounted and detected a user?')
-        this.setState({ loggedIn: true }).then(
-          this.props.giveState(this.state.loggedIn)
-        )
-      } else {
-        this.setState({loggedIn: false})
-        console.log("There is no validated user. (Login.js)");
-      }
-    })
-  }
+  // componentDidMount() {
+  //   console.log('Login Mounted', this.state.loggedIn);
+  //   // API.htmlRoute();
+  //   API.doesUserExist().then(res => {
+  //     if (res) {
+  //       console.log('Login mounted and detected a user?')
+  //       this.setState({ loggedIn: true }).then(
+  //         this.props.giveState(this.state.loggedIn)
+  //       )
+  //     } else {
+  //       this.setState({loggedIn: false})
+  //       console.log("There is no validated user. (Login.js)");
+  //     }
+  //   })
+  // }
 
   componentWillReceiveProps(newProps) {
     if (newProps.loggedIn !== this.props.loggedIn) {
@@ -51,8 +51,17 @@ class Login extends Component {
     event.preventDefault();
     API.logInUser(this.state)
       .then(res => {
-        this.setState({ loggedIn: true })
-        this.props.giveState(this.state.loggedIn)
+        if (res) {
+          console.log('and the res from API.loginUser was:', res)
+          this.setState({ loggedIn: true })
+          //giveState = grabLoggedState from App.js
+          console.log('Does the givestate run before its rerendered??')
+          this.props.giveState(this.state.loggedIn)
+        } else {
+          console.log('was no "RES" from logInUser. :(')
+        }
+        console.log("end of log in function")
+
       });
   }
 
@@ -91,8 +100,8 @@ class Login extends Component {
             <h3>Password</h3>
             <input type='password' name='password' id='password' placeholder="password" />
             <p>or
-        <a
-                onClick={this.signUp}> sign up.</a>
+        <span
+                onClick={this.signUp}> sign up.</span>
             </p>
             <button type='submit'
               onClick={this.logIn}

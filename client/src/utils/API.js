@@ -17,7 +17,17 @@ export default {
     console.log('attempting login from API...with :', data);
     return axios.post('/api/users/login', data)
       .then(res => {
-        console.log('res from loginUser from API:', res)
+        if (res.data) {
+          console.log(res.data);
+          return "Login was good.!";
+
+
+        }
+        else {
+          return "Login FAILED."
+        }
+
+        console.log('res from loginUser from API: ("/home"? )', res.data)
         // window.location.assign(res.data);
         //reloads. No good. I want the site not to refresh.
         // window.history.pushState(null, null, "/home");
@@ -32,6 +42,7 @@ export default {
   logoutUser: () => {
     return axios.post('/api/users/logout').then(res => {
       console.log('res should be "/"', res)
+      return "You done got logged out"
     })
   },
 

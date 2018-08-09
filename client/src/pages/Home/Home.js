@@ -20,6 +20,7 @@ class Home extends Component {
   }
 
   render() {
+    console.log('HOME has begun to render')
     return (
       <div className="fullPage"
         style={divStyle}>

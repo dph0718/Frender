@@ -42,7 +42,8 @@ class AmpSwitch extends Component {
 
     return (
       <div className="knobAndLabel"
-        onClick={this.props.onClick}
+      // hitSwitch = hitSwitch from Login.js
+        onClick={this.props.hitSwitch}
         >
         <div className="ampKnob clickable">
           <img className="nums" alt="amp switch" src={button} />

@@ -43,35 +43,40 @@ class App extends Component {
   componentDidMount() {
     console.log("App Mounted!")
   }
-  // logInState = () => {
-  //   API.doesUserExist().then(res => {
-  //     if (res) {
-  //       this.setState({ loggedIn: true })
-  //     } else {
-  //       console.log('no user from App.js')
-  //     }
-  //   })
-  // };
 
   grabLoggedState = (compProp) => {
     this.setState({ loggedIn: compProp })
     console.log('grabbed the state from:', compProp)
   };
 
+
   render() {
     console.log('Begin App Render...')
     return (
       <Router>
         <div style={colorStyle}>
-          <Nav
+          <Route path="/"
+            render={props =>
+              <Nav {...props}
+                giveState={this.grabLoggedState}
+                loggedIn={this.state.loggedIn}
+              />} />
+          {/* <Nav
             giveState={this.grabLoggedState}
-            loggedIn={this.state.loggedIn} />
+            loggedIn={this.state.loggedIn} /> */}
           <Switch>
             {/* <Route exact path="/" component={Login} /> */}
             <Route exact path="(/|/login)"
-              render={props => <Login {...props}
-                giveState={this.grabLoggedState}
-                loggedIn={this.state.loggedIn} />} />
+              render={props =>
+                <div>
+                  {/* <Nav {...props}
+                    giveState={this.grabLoggedState}
+                    loggedIn={this.state.loggedIn}
+                  /> */}
+                  <Login {...props}
+                    giveState={this.grabLoggedState}
+                    loggedIn={this.state.loggedIn} />
+                </div>} />
             <Route exact path="/home" component={Home} />
             <Route exact path="/profile" component={ProfileEdit} />
             <Route exact path="/search" component={SearchResults} />

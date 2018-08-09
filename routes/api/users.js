@@ -43,7 +43,10 @@ router.post('/login', passport.authenticate("local"),
     // res.json(`${req.user}`)
 
     // Send an object that contains both the route to redirect to, and 
-    res.json(`/home`);
+    //JUST KIDDING. gona try: send true.
+    //  it doesn't get here unless it passes anyway, right? try not authenticating and see if it logs.
+
+    res.send("This the res.send from from users router. ");
   });
 
 router.post('/logout', (req, res) => {
