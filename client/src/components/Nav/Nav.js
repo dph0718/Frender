@@ -35,7 +35,6 @@ class Nav extends Component {
   }
 
   render() {
-    //'lift state up'
     const loggedIn = this.state.loggedIn;
 
     const AmpSwitchHandler = () => {
@@ -44,7 +43,6 @@ class Nav extends Component {
           <AmpSwitch
             label="Logout"
             loggedIn={loggedIn}
-            // onClick={console.log('not hit switch no more. Make link?')} 
             hitSwitch={this.hitSwitch}
           />
         )
@@ -66,6 +64,7 @@ class Nav extends Component {
       } else
         return null;
     }
+    
     return (
       <nav className="navbar" >
         < AmpSwitchHandler />

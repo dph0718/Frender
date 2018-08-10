@@ -61,11 +61,11 @@ class PlayerInfo extends Component {
     //render stars for user's skill level
     let starray = []
     let star = String.fromCharCode(0x2605);
-    for (let i = 0; i <= this.state.experience; i++) {
+    for (let i = 1; i <= this.state.experience; i++) {
       starray.push(star)
     };
     let rateArray = [];
-    for (let i = 0; i <= this.state.rating; i++) {
+    for (let i = 1; i <= this.state.rating; i++) {
       rateArray.push(star)
     };
 
@@ -77,11 +77,11 @@ class PlayerInfo extends Component {
     //translate the endeavor to something readable.
     let endeavor;
     switch (this.state.endeavour) {
-      case 0: endeavor = "Write music.";
+      case 1: endeavor = "Write music.";
         break;
-      case 1: endeavor = "Do covers.";
+      case 2: endeavor = "Do covers.";
         break;
-      case 2: endeavor = "Just see what happens.";
+      case 3: endeavor = "Just see what happens.";
         break;
         default: endeavor = "For some reason, there isn't any aspiration at all here."
     }

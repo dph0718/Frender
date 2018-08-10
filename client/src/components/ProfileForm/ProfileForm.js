@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./profileform.css";
 import ArrayInput from "./ArrayInput.js";
-// import API from "../../utils/API";
+import API from "../../utils/API";
 
 
 // const bgImg = '/images/frenderAmp-small.png';
@@ -13,11 +13,11 @@ class ProfileForm extends Component {
     firstName: "",
     lastName: "",
     email: "",
-    experience: "",
+    experience: "1",
     instruments: [],
     influences: [],
     genres: [],
-    endeavors: "",
+    endeavors: "3",
     etCetera: "",
   };
 
@@ -25,31 +25,33 @@ class ProfileForm extends Component {
   handleInputChange = event => {
     // Pull the name and value properties off of the event.target (the element which triggered the event)
     const { name, value } = event.target;
-    console.log('firstName:', this.state.firstName);
     // Set the state for the appropriate input field
     this.setState({
-      [name]: value
+      [name]: value,
     }, () => {
       console.log(this.state);
     });
-    console.log('here I come instruments', this.state.instruments)
-    console.log('here I come firstname', this.state.firstName)
   };
 
-
+  //We need to get the user's info and populate the input fields with 
+  //data already associated with the user
   // componentDidMount(){
   //   API.getUser
   // }
 
   //here we gotta post this stuff to the user's mongodb document
   handleFormSubmit = event => {
-
+    event.preventDefault();
+    console.log("Attempting the updateProfile route...")
+    API.updateProfile(this.state).then(res => {
+      console.log('Success! The profile has been updated!')
+      console.log('The API wants you to know:', res);
+      console.log(res);
+    })
   };
 
   //collects the arrays of inputs from the state of the children <ArrayInput /> components
   gimmeDat = (theState, name) => {
-    console.log('logging theState:', theState);
-    console.log('log the name:', name);
     this.setState({
       [name]: theState,
     })
@@ -58,9 +60,9 @@ class ProfileForm extends Component {
   render() {
     return (
       <div className='profileEditor'>
-      <form
-      id='profileForm'
-        onChange={this.handleInputChange}>
+        <form
+          id='profileForm'
+          onChange={this.handleInputChange}>
 
 
           <h1> The World is Your Stage,</h1>
@@ -77,11 +79,11 @@ class ProfileForm extends Component {
 
           <h3>Your experience level</h3>
           <select name="experience">
-            <option name="experience" value="0">I'm awful, but I'm trying.</option>
-            <option name="experience" value="1">I'm ... Ok?</option>
-            <option name="experience" value="2">I'm good. Not great, but I'm good. </option>
-            <option name="experience" value="3">I'm quite comfortable on stage or in the studio.</option>
-            <option name="experience" value="4">Hold my Grammy while I finish editing my profile.</option>
+            <option name="experience" defaultValue="1">I'm awful, but I'm trying.</option>
+            <option name="experience" value="2">I'm ... Ok?</option>
+            <option name="experience" value="3">I'm good. Not great, but I'm good. </option>
+            <option name="experience" value="4">I'm quite comfortable on stage or in the studio.</option>
+            <option name="experience" value="5">Hold my Grammy while I finish editing my profile.</option>
           </select>
 
           <ArrayInput
@@ -116,16 +118,16 @@ class ProfileForm extends Component {
 
           <h3>Creative endeavors</h3>
           <select name="endeavors">
-            <option name="endeavors" value="0">I just want to write music.</option>
-            <option name="endeavors" value="1">I want to play some covers.</option>
-            <option name="endeavors" value="2">Let's just see what happens...</option>
+            <option name="endeavors" value="1">I just want to write music.</option>
+            <option name="endeavors" value="2">I want to play some covers.</option>
+            <option name="endeavors" defaultValue="3">Let's just see what happens...</option>
           </select>
 
           <h3>Anything else?</h3>
           <textarea name='etCetera'></textarea>
-        <button type='submit'
-          onClick={this.handleFormSubmit}>Create Profile</button>
-      </form>
+          <button type='submit'
+            onClick={this.handleFormSubmit}>Create Profile</button>
+        </form>
       </div>
     );
   }

@@ -18,27 +18,9 @@ class Login extends Component {
     loggedIn: this.props.loggedIn
   };
 
-  // componentDidMount() {
-  //   console.log('Login Mounted', this.state.loggedIn);
-  //   // API.htmlRoute();
-  //   API.doesUserExist().then(res => {
-  //     if (res) {
-  //       console.log('Login mounted and detected a user?')
-  //       this.setState({ loggedIn: true }).then(
-  //         this.props.giveState(this.state.loggedIn)
-  //       )
-  //     } else {
-  //       this.setState({loggedIn: false})
-  //       console.log("There is no validated user. (Login.js)");
-  //     }
-  //   })
-  // }
-
   componentWillReceiveProps(newProps) {
     if (newProps.loggedIn !== this.props.loggedIn) {
       this.setState({ loggedIn: newProps.loggedIn })
-      console.log("Login received new Props:", this.props.loggedIn)
-      console.log("Login's setState:", this.state.loggedIn)
     }
   };
   //sends a post method to create user.
@@ -52,16 +34,12 @@ class Login extends Component {
     API.logInUser(this.state)
       .then(res => {
         if (res) {
-          console.log('and the res from API.loginUser was:', res)
           this.setState({ loggedIn: true })
           //giveState = grabLoggedState from App.js
-          console.log('Does the givestate run before its rerendered??')
           this.props.giveState(this.state.loggedIn)
         } else {
           console.log('was no "RES" from logInUser. :(')
         }
-        console.log("end of log in function")
-
       });
   }
 
@@ -76,18 +54,10 @@ class Login extends Component {
     });
   };
 
-  componentDidMount() {
-    console.log('Login Mounted.')
-  };
-
   render() {
-    console.log('Begin Login Render:')
-    console.log(`The state.loggedIn here in Login.js is:`, this.state.loggedIn)
     if (this.state.loggedIn) {
-      console.log(`apparently there's already a user in Login.js, so a redirect occured!`)
       return <Redirect to="/home" />
     }
-    console.log(`apparently, Login.js didn't detect a user; state.loggedIn:`, this.state.loggedIn)
     return (
       <div className="fullPage"
         style={divStyle}>

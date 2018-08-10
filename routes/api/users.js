@@ -51,8 +51,17 @@ router.post('/login', passport.authenticate("local"),
 
 router.post('/logout', (req, res) => {
   req.logout();
-  res.send('/');
+  res.send('Logout was successful');
 })
+
+// router.post("/updateProfile", (req, res) => {
+//   console.log('someone is trying to update their profile with:', req.body)
+//   console.log(`We'll send a fake success message...`)
+//   res.send(`This is pretend success message. Shootin' blanks here.`)
+// })
+
+//+++Trying userController.update rather than (req, res_=>{})
+router.post("/updateProfile", userController.update);
 
 router.post('/', userController.create);
 // router.post('/', (req, res) => {

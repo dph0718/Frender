@@ -25,6 +25,7 @@ class SearchResults extends Component {
     rating: 4,
   }
 
+
   nextPlayer = () => {
     console.log("before:", this.state);
     this.setState(
@@ -35,16 +36,16 @@ class SearchResults extends Component {
         instrumentArray: ['guitar', 'triangle', 'spoons'],
         genreArray: ['rock', 'showtunes'],
         influenceArray: ['Pearl Jam', 'Elton John', 'Barry Manilow'],
-        endeavour: 0,
+        endeavour: 1,
         addInfo: "Even with 3 fingers, I can outplay Jason Mraz.",
         rating: 3,
       }, () => {
-        this.forceUpdate();
-        console.log();
+
         console.log('after: the async callback.:', this.state);
       }
     );
-  }
+  };
+
   render() {
     return (
       <div className="fullPage"
@@ -52,7 +53,7 @@ class SearchResults extends Component {
         <div className="infoContainer">
           <PlayerCard
             prevState={this.state}
-            // image={this.state.image}
+            image={this.state.image}
             className='playerCard' />
           <PlayerInfo
             click={this.nextPlayer}

@@ -15,7 +15,7 @@ class Home extends Component {
 
   componentDidMount() {
     //in here, set state to the user's info -- use a route?
-    API.homeMethod(this);
+    API.getUserInfo(this);
     // AmpSwitch.setState({on: true})
   }
 

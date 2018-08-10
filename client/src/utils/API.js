@@ -20,34 +20,22 @@ export default {
         if (res.data) {
           console.log(res.data);
           return "Login was good.!";
-
-
         }
         else {
           return "Login FAILED."
         }
-
-        console.log('res from loginUser from API: ("/home"? )', res.data)
-        // window.location.assign(res.data);
-        //reloads. No good. I want the site not to refresh.
-        // window.history.pushState(null, null, "/home");
-        //no errors, but no clue what it did. Not what I want.
-
-        // return <Redirect push to="/home" />
-        //trying the above within Login as a then method.
-
       })
   },
 
   logoutUser: () => {
     return axios.post('/api/users/logout').then(res => {
-      console.log('res should be "/"', res)
-      return "You done got logged out"
+      console.log(res.data)
+      return
     })
   },
 
-  homeMethod: (component) => {
-    console.log('homeMethod');
+  getUserInfo: (component) => {
+    //gotta rename & file this route.
     return axios.get('/home').then(res => {
       console.log('home axios res:', res)
       component.setState({
@@ -64,27 +52,25 @@ export default {
       })
   },
 
-  // Gets the user with the given id
-  getUser: function (id) {
-    return axios.get("/api/users/" + id);
-  },
-  // Deletes the book with the given id
-  deleteBook: function (id) {
-    return axios.delete("/api/books/" + id);
-  },
-  // Saves a book to the database
-  saveBook: function (bookData) {
-    return axios.post("/api/books", bookData);
-  },
-
-  //experimental route for getting some html route response
-  htmlRoute: () => {
-    return axios.get('/bugpie/html')
-      .then((res) => {
-        console.log('You got the html routes to work!!')
-        console.log('res:', res.data)
-        // window.location.replace('/search');
-
-      });
+  updateProfile: (data) => {
+    console.log('within API.updateProfile, using:');
+    console.log(data);
+    return axios.post('/api/users/updateProfile', data)
+      .then(res => {
+        console.log('Got a response from the server. Tell the component we"re good!')
+        return `"We're good. Got this message from the server: ${res.data}`
+      })
   }
+  // // Gets the user with the given id
+  // getUser: function (id) {
+  //   return axios.get("/api/users/" + id);
+  // },
+  // // Deletes the book with the given id
+  // deleteBook: function (id) {
+  //   return axios.delete("/api/books/" + id);
+  // },
+  // // Saves a book to the database
+  // saveBook: function (bookData) {
+  //   return axios.post("/api/books", bookData);
+  // },
 };

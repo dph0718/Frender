@@ -6,17 +6,21 @@ const SALT_WORK_FACTOR = 10;
 const UserSchema = new Schema({
   password: String,
   email: String,
-  // firstName: { type: String, required: true },
-  // lastName: { type: String, required: true },
-  // instruments: {type: Array, required: true},
-  // genres: {type: Array, required: true},
-  // influences: {type: Array, required: true},
-  // dateUpdated: { type: Date, default: Date.now },
-  // instrumentsSeeked: {type: Array, required: true},
-  // skillSeeked: {type: Number, required: true},
-  // unreadMessages: Array,
-  // readMessages: Array,
+  firstName: { type: String },
+  lastName: { type: String },
+  experience: String,
+  instruments: {type: Array},
+  influences: {type: Array},
+  genres: {type: Array},
+  dateUpdated: { type: Date, default: Date.now },
+  endeavors: String,
+  etCetera: String,
+  instrumentsSeeked: {type: Array},
+  skillSeeked: {type: Number},
+  unreadMessages: Array,
+  readMessages: Array,
 },
+
   validPassword = function (password) {
     console.log('validating password...', password)
     return bcrypt.compareSync(password, this.password);
@@ -46,7 +50,7 @@ UserSchema.pre('save', function (next) {
 
 UserSchema.methods.validPassword = function (password) {
   console.log('validating password...', password)
-  return bcrypt.compareSync(password, this.password);
+  return bcrypt.compareSync(password, this.password)
 }
 // UserSchema.prototype.comparePassword = function (candidatePassword, cb) {
 //   console.log('candPass:', candidatePassword, "this.pass:", this.password);
