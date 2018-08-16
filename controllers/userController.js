@@ -22,6 +22,7 @@ module.exports = {
       .findOne({ _id: req.user._id })
       // .findOne({ _id: req.user._id })
       .then(result => {
+        let updatedUser = {};
         console.log('within update:, doing db.find, and getting:', result)
         console.log('result.email:', result.email)
         for (var prop in req.body) {
@@ -36,13 +37,20 @@ module.exports = {
               console.log(`The new and old are not the same, we have to update it.`)
               db.User.findOneAndUpdate({ _id: req.user._id }, { [prop]: req.body[prop] })
                 .then(updateRes => {
-                  console.log(`Now CHECK ROBO and SEe if it worked!!`)
+                  console.log(`Changed in Robo, should've:::`);
+                  console.log('barracuda:', prop);
+                  //new, not broken...
+                  updatedUser[prop] = updateRes[prop]
+                  console.log('fish:', updatedUser);
                 })
             }
           }
         }
         console.log(`Next to do: Update ${req.user.firstName}'s profile`)
-        res.send("THe profile was found and values compared. Update has occured.")
+        setTimeout(() => {
+          res.json(updatedUser)
+        }, 3000);
+        // res.send("THe profile was found and values compared. Update has occured.")
         // console.log(`updating ${req.user.firstName}'s profile`)
       })
   }

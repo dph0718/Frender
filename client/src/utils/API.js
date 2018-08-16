@@ -38,10 +38,15 @@ export default {
     //gotta rename & file this route.
     return axios.get('/home').then(res => {
       console.log('home axios res:', res)
-      component.setState({
-        email: res.data.email,
-        id: res.data.id
-      })
+      for (var prop in res.data){
+        component.setState({
+          [prop]: res.data[prop]
+        })
+      }
+      // component.setState({
+      //   email: res.data.email,
+      //   id: res.data.id
+      // })
     })
   },
 
@@ -58,7 +63,7 @@ export default {
     return axios.post('/api/users/updateProfile', data)
       .then(res => {
         console.log('Got a response from the server. Tell the component we"re good!')
-        return `"We're good. Got this message from the server: ${res.data}`
+        return res.data;
       })
   }
   // // Gets the user with the given id

@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import API from "../../utils/API";
 import './home.css';
+import { Redirect } from "react-router-dom";
+
 
 const bgImg = '/images/frenderAmp-small.png';
 const divStyle = {
@@ -21,6 +23,9 @@ class Home extends Component {
 
   render() {
     console.log('HOME has begun to render')
+    if (this.state.loggedIn) {
+      return <Redirect to="/profile" />
+    }
     return (
       <div className="fullPage"
         style={divStyle}>
@@ -28,7 +33,7 @@ class Home extends Component {
           <h1>Home Page </h1>
           {/* <p>{req.user}</p> */}
           <h2> Your email is: {this.state.email}</h2>
-          <h2> Your id is: {this.state.id}</h2>
+          <h2> Your id is: {this.state._id}</h2>
         </div>
       </div>
     );

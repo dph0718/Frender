@@ -55,8 +55,10 @@ class Login extends Component {
   };
 
   render() {
+    //if they have info, Redirect to /home, 
+    //if not, redirect to /profile
     if (this.state.loggedIn) {
-      return <Redirect to="/home" />
+      return <Redirect to="/profile" />
     }
     return (
       <div className="fullPage"
