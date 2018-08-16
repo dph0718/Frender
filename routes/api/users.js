@@ -5,11 +5,11 @@ const passport = require("../../config/passport");
 
 
 router.get('/', (req, res) => {
-  if (!req.user) {
-    res.send(false)
-  } else {
-    res.send(true);
-  }
+    if (!req.user) {
+        res.send(false)
+    } else {
+        res.send(true);
+    }
 });
 
 // router.post('/login', passport.authenticate("local"), function (req, res) {
@@ -30,28 +30,28 @@ router.get('/', (req, res) => {
 
 router.post('/login', passport.authenticate("local"),
 
-  function (req, res) {
-    console.log(req.user);
-    // console.log('frender login route req.body:', req.body)
-    // console.log('frendr login req.user:', req.user);
-    // Since we're doing a POST with javascript, we can't actually redirect that post into a GET request
-    // So we're sending the user back the route to the members page because the redirect will happen on the front end
-    // They won't get this or even be able to access this page if they aren't authed
+    function(req, res) {
+        console.log(req.user);
+        // console.log('frender login route req.body:', req.body)
+        // console.log('frendr login req.user:', req.user);
+        // Since we're doing a POST with javascript, we can't actually redirect that post into a GET request
+        // So we're sending the user back the route to the members page because the redirect will happen on the front end
+        // They won't get this or even be able to access this page if they aren't authed
 
-    //BTW: res.redirect performs a GET request to whatever other route you tell it. 
-    // res.redirect(`/home`);
-    // res.json(`${req.user}`)
+        //BTW: res.redirect performs a GET request to whatever other route you tell it. 
+        // res.redirect(`/home`);
+        // res.json(`${req.user}`)
 
-    // Send an object that contains both the route to redirect to, and 
-    //JUST KIDDING. gona try: send true.
-    //  it doesn't get here unless it passes anyway, right? try not authenticating and see if it logs.
+        // Send an object that contains both the route to redirect to, and 
+        //JUST KIDDING. gona try: send true.
+        //  it doesn't get here unless it passes anyway, right? try not authenticating and see if it logs.
 
-    res.send("This the res.send from from users router. ");
-  });
+        res.send("This the res.send from from users router. ");
+    });
 
 router.post('/logout', (req, res) => {
-  req.logout();
-  res.send('Logout was successful');
+    req.logout();
+    res.send('Logout was successful');
 })
 
 // router.post("/updateProfile", (req, res) => {
@@ -68,6 +68,10 @@ router.post('/', userController.create);
 //   console.log('what is this>>????', req);
 //   res.json('i think you got it.');
 // });
+
+router.get('/searchUsers', userController.getMatches, (req, res) => {
+    console.log('Alright, the users.js logs after getMatches')
+})
 
 // Matches with "/api/books"
 

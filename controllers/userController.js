@@ -13,6 +13,27 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
 
+  getMatches: (req, res) => {
+    const dummy = {
+      instrumentsSought: ['piano', 'guitar', 'drums'],
+      skillSought: 1,
+      influences: ['pearl jam', '']
+    };
+    console.log('Getting Matches');
+    //replace dummy with req.user after testing
+    db.User
+      .find({ instruments: { $all: dummy.instrumentsSought[0] } })
+      .where('experience').gte(dummy.skillSought)
+      .then(result => {
+        //[ ] Filter out the result with the user's _id.
+        //[ ] Loop through each of user's fields and assign points based on difference of index of match
+
+        //[ ] 
+          console.log('Match Results:', result)
+          //send these results back to users.js in Routes... eventually
+      })
+  },
+
   update: (req, res) => {
 
     console.log("IN DA UPDATE")
@@ -37,19 +58,14 @@ module.exports = {
               console.log(`The new and old are not the same, we have to update it.`)
               db.User.findOneAndUpdate({ _id: req.user._id }, { [prop]: req.body[prop] })
                 .then(updateRes => {
-                  console.log(`Changed in Robo, should've:::`);
-                  console.log('barracuda:', prop);
                   //new, not broken...
                   updatedUser[prop] = updateRes[prop]
-                  console.log('fish:', updatedUser);
                 })
             }
           }
         }
         console.log(`Next to do: Update ${req.user.firstName}'s profile`)
-        setTimeout(() => {
-          res.json(updatedUser)
-        }, 3000);
+
         // res.send("THe profile was found and values compared. Update has occured.")
         // console.log(`updating ${req.user.firstName}'s profile`)
       })

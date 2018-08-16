@@ -9,6 +9,14 @@ class ArrayInput extends Component {
     array: [],
   };
 
+  //fingers X'ed
+  componentWillReceiveProps(newProps) {
+    console.log("ARRAY input recieved props", newProps.items)
+    if (newProps.items !== this.state.items) {
+      this.setState({ array: newProps.items })
+    }
+  }
+
   // handle any changes to the input fields
   handleInputChange = event => {
     let storedArray = this.state.array;
@@ -19,7 +27,7 @@ class ArrayInput extends Component {
       array: storedArray,
     });
     this.props.gimmeDat(this.state.array, this.props.statename);
-    console.log(this.state.array)
+    console.log('arrayInput:', this.state.array)
   };
 
   addAnInput = (event) => {
@@ -38,9 +46,20 @@ class ArrayInput extends Component {
         <fieldset
           onChange={this.handleInputChange}>
           <legend>{this.props.formTitle}</legend>
-          <input type='text' statename={this.props.statename} name="0" placeholder={this.props.ex0} /> <br />
-          <input type='text' statename={this.props.statename} name="1" placeholder={this.props.ex1} /><br />
-          <input type='text' statename={this.props.statename} name="2" placeholder={this.props.ex2} /><br />
+          <input type='text' statename={this.props.statename}
+            name="0"
+            placeholder={this.props.ex0}
+            defaultValue={this.state.array[0]} /> <br />
+          <input type='text'
+            statename={this.props.statename}
+            name="1"
+            placeholder={this.props.ex1}
+            defaultValue={this.state.array[1]} /><br />
+          <input type='text'
+            statename={this.props.statename}
+            name="2"
+            placeholder={this.props.ex2}
+            defaultValue={this.state.array[2]} /><br />
           {xtraInput.map(name => {
             return <div key={name}>
               <input type='text' statename={this.props.statename} key={name} name={name} placeholder={this.props.placeholder} ></input><br />
