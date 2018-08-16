@@ -38,10 +38,13 @@ export default {
     //gotta rename & file this route.
     return axios.get('/home').then(res => {
       console.log('home axios res:', res)
-      component.setState({
-        email: res.data.email,
-        id: res.data.id
-      })
+      let user = {};
+      for (var prop in res.data) {
+        console.log(`popping ${prop} into the res as ${res.data[prop]}`)
+        user[prop] = res.data[prop];
+      }
+      return user;
+      // component.setState(user);
     })
   },
 
@@ -60,7 +63,9 @@ export default {
         console.log('Got a response from the server. Tell the component we"re good!')
         return `"We're good. Got this message from the server: ${res.data}`
       })
-  }
+  },
+
+}
   // // Gets the user with the given id
   // getUser: function (id) {
   //   return axios.get("/api/users/" + id);
@@ -73,4 +78,4 @@ export default {
   // saveBook: function (bookData) {
   //   return axios.post("/api/books", bookData);
   // },
-};
+

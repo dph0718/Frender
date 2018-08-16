@@ -31,7 +31,7 @@ router.get('/', (req, res) => {
 router.post('/login', passport.authenticate("local"),
 
   function (req, res) {
-    console.log(req.user);
+    console.log(req.user.firstName, "just logged in.");
     // console.log('frender login route req.body:', req.body)
     // console.log('frendr login req.user:', req.user);
     // Since we're doing a POST with javascript, we can't actually redirect that post into a GET request

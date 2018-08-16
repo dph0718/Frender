@@ -11,10 +11,21 @@ router.use('/page', htmlRoutes);
 
 //testing...
 router.use('/home', isAuthenticated, (req, res) => {
-  res.json({
-    email: req.user.email,
-    id: req.user._id
-  })
+  let user = {};
+  for (var prop in req.user) {
+    if (prop !== "password") {
+      user[prop] = req.user[prop];
+    }
+  }
+
+  res.json(user);
+
+
+  // {
+  //   email: req.user.email,
+  //   id: req.user._id,
+
+  // })
 })
 
 // If no API routes are hit, send the React app

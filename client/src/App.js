@@ -41,17 +41,19 @@ class App extends Component {
   };
 
   componentDidMount() {
-    console.log("App Mounted!")
+    console.log("App MOUNTED")
   }
 
   grabLoggedState = (compProp) => {
-    this.setState({ loggedIn: compProp })
-    console.log('grabbed the state from:', compProp)
+    this.setState({ loggedIn: compProp },
+    ()=>{
+      console.log("Grabbing logged state from Login.js to App.js")
+    })
   };
 
 
   render() {
-    console.log('Begin App Render...')
+    console.log('App RENDER...')
     return (
       <Router>
         <div style={colorStyle}>

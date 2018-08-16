@@ -33,10 +33,14 @@ class Login extends Component {
     event.preventDefault();
     API.logInUser(this.state)
       .then(res => {
+        console.log('API returned data to Login.js')
         if (res) {
-          this.setState({ loggedIn: true })
-          //giveState = grabLoggedState from App.js
-          this.props.giveState(this.state.loggedIn)
+          this.setState({ loggedIn: true }),
+            () => {
+              console.log('this is valid?');
+              //giveState = grabLoggedState from App.js
+              this.props.giveState(this.state.loggedIn)
+            }
         } else {
           console.log('was no "RES" from logInUser. :(')
         }
@@ -56,7 +60,8 @@ class Login extends Component {
 
   render() {
     if (this.state.loggedIn) {
-      return <Redirect to="/home" />
+      console.log('Login.js redirecting to /profile')
+      return <Redirect to="/profile" />
     }
     return (
       <div className="fullPage"

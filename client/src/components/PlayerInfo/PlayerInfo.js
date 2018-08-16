@@ -41,6 +41,8 @@ class PlayerInfo extends Component {
   //   );
   // }
 
+
+
   doClick = () => {
     console.log('player info.js onClick method.')
     this.props.click();
@@ -75,13 +77,14 @@ class PlayerInfo extends Component {
     const influences = sentencify(this.state.influenceArray);
 
     //translate the endeavor to something readable.
+    //saves space in database by storing as an INT? 
     let endeavor;
     switch (this.state.endeavour) {
-      case 1: endeavor = "Write music.";
+      case 1: endeavor = "I just want to write music.";
         break;
-      case 2: endeavor = "Do covers.";
+      case 2: endeavor = "I want to play some covers.";
         break;
-      case 3: endeavor = "Just see what happens.";
+      case 3: endeavor = "Let's just see what happens.";
         break;
         default: endeavor = "For some reason, there isn't any aspiration at all here."
     }
