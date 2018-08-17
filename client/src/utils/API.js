@@ -58,6 +58,22 @@ export default {
       })
   },
 
+  makeABunch: ()=>{
+    return axios.get('/api/users/makeUsers')
+    .then(res=>{
+      console.log("This should be a long list of _id's:", res.data);
+    })
+    // console.log('we already populated the db.')
+  }, 
+
+  deleteDummies: ()=>{
+    return axios.delete('/api/users/deleteDummies')
+    .then(res=>{
+      console.log("Dummies deleted!")
+    })
+
+  },
+
   getMatches: () => {
     return axios.get('/api/users/searchUsers')
 

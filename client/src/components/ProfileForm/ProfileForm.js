@@ -65,6 +65,10 @@ class ProfileForm extends Component {
       <div className='profileEditor'>
       <button onClick={API.getMatches}> SEARCH
         </button>
+      <button onClick={API.makeABunch}> MAKE
+        </button>
+      <button onClick={API.deleteDummies}> Delete DUMMIES
+        </button>
         <form
           id='profileForm'
           onChange={this.handleInputChange}>

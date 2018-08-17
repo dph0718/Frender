@@ -73,6 +73,8 @@ router.get('/searchUsers', userController.getMatches, (req, res) => {
     console.log('Alright, the users.js logs after getMatches')
 })
 
+router.get('/makeUsers', userController.putABunchInThere);
+router.delete('/deleteDummies', userController.deleteDummies, ()=>{console.log('deleted')});
 // Matches with "/api/books"
 
 

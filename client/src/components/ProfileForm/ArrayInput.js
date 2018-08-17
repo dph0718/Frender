@@ -11,7 +11,6 @@ class ArrayInput extends Component {
 
   //fingers X'ed
   componentWillReceiveProps(newProps) {
-    console.log("ARRAY input recieved props", newProps.items)
     if (newProps.items !== this.state.items) {
       this.setState({ array: newProps.items })
     }
@@ -27,7 +26,6 @@ class ArrayInput extends Component {
       array: storedArray,
     });
     this.props.gimmeDat(this.state.array, this.props.statename);
-    console.log('arrayInput:', this.state.array)
   };
 
   addAnInput = (event) => {
@@ -35,8 +33,6 @@ class ArrayInput extends Component {
     this.setState({ extraInputs: [...this.state.extraInputs, this.state.numOfInput] });
     this.setState({ numOfInput: (this.state.numOfInput + 1) });
     // this.forceUpdate();
-    console.log('array of extra inputs:', this.state.extraInputs);
-    console.log('numofinput:', this.state.numOfInput);
   }
 
   render() {
