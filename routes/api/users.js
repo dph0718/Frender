@@ -54,40 +54,13 @@ router.post('/logout', (req, res) => {
     res.send('Logout was successful');
 })
 
-// router.post("/updateProfile", (req, res) => {
-//   console.log('someone is trying to update their profile with:', req.body)
-//   console.log(`We'll send a fake success message...`)
-//   res.send(`This is pretend success message. Shootin' blanks here.`)
-// })
-
-//+++Trying userController.update rather than (req, res_=>{})
 router.post("/updateProfile", userController.update);
 
 router.post('/', userController.create);
-// router.post('/', (req, res) => {
-//   console.log('what is this>>????', req);
-//   res.json('i think you got it.');
-// });
 
-router.get('/searchUsers', userController.getMatches, (req, res) => {
-    console.log('Alright, the users.js logs after getMatches')
-})
+router.get('/searchUsers', userController.getMatches);
 
 router.get('/makeUsers', userController.putABunchInThere);
-router.delete('/deleteDummies', userController.deleteDummies, ()=>{console.log('deleted')});
-// Matches with "/api/books"
-
-
-// router.route("/")
-//   .post(userController.create)
-
-
-// .get();
-// Matches with "/api/books/:id"
-// router
-//   .route("/:id")
-//   .get(booksController.findById)
-//   .put(booksController.update)
-//   .delete(booksController.remove);
+router.delete('/deleteDummies', userController.deleteDummies, () => { console.log('deleted') });
 
 module.exports = router;

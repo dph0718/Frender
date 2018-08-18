@@ -40,7 +40,6 @@ class SearchResults extends Component {
         addInfo: "Even with 3 fingers, I can outplay Jason Mraz.",
         rating: 3,
       }, () => {
-
         console.log('after: the async callback.:', this.state);
       }
     );

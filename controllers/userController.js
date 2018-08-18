@@ -14,25 +14,83 @@ module.exports = {
   },
 
   getMatches: (req, res) => {
+    // [ ] Replace dummy with req.user after testing
     const dummy = {
-      instrumentsSought: ['zither'],
+      instrumentsSought: ['guitar', 'hurdhur', 'trombone'],
+      instruments: ['lkjasdf', 'gtar', 'bass'],
       skillSought: 1,
-      influences: ['pearl jam', '']
+      influences: ['pearl jam', 'brooks & dunn'],
+      experience: 3,
+      _id: "41224d776a326fb40f000001",
     };
-    console.log('Getting Matches');
-    //replace dummy with req.user after testing
-    db.User
-      // .find({ instruments: { $all: dummy.instrumentsSought[0] } })
-      .find({ instruments: { $all: dummy.instrumentsSought[0] } })
-      // .where('experience').gte(parseInt(dummy.skillSought))
-      .then(result => {
-        //[ ] Filter out the result with the user's _id.
-        //[ ] Loop through each of user's fields and assign points based on difference of index of match
 
-        //[ ] 
-        console.log('How Many Match Results:', result)
-        //send these results back to users.js in Routes... eventually
-      })
+    let i = 0;
+    let x = 0;
+    let y = 0;
+
+    const search = (() => {
+      db.User
+        .find({
+          //properties of THE OTHER USER
+          _id: { $ne: dummy._id },
+          experience: { $gte: dummy.skillSought },
+          skillSought: { $lte: dummy.experience },
+          instruments: { $all: dummy.instrumentsSought[x] },
+          instrumentsSought: { $all: dummy.instruments[y] },
+        })
+        .then(result => {
+          if (result.length == 0) {
+            //If MY need isn't met, meet my next need.
+            if (x < dummy.instrumentsSought.length - 1) {
+              x++;
+              search();
+              //If there's still nothin by the time i've gotten to my last one, 
+              //see if MY instruments, starting with my first, are needed by anyone else
+              //
+            } else if (y < dummy.instruments.length) {
+              x = 0;
+              y++;
+              search();
+            }
+            else console.log('Sorry, no matches.')
+          }
+          else {
+            //for each of the users, and each of their attributes, calculate abs value of the difference
+            //from the dummy's/req.user's attributes.
+            // or the index difference of their genres...
+            //=====================================the following in a 'forEach' user(from results), and Then-> 'for ... in' for users' fields================================================
+            //Each matching field yields a certain number of 'points', as these variables:
+            result.forEach((e, i) => {
+              const pointsAssigner = ((val) => {
+                console.log(val);
+                switch (val) {
+                  case 0:
+                    return 20;
+                  case 1:
+                    return 10;
+                  default:
+                    return 5;
+                }
+              })
+
+              let instPoints = pointsAssigner(y);
+              let instSotPoints = pointsAssigner(x);
+              let genrePoints;
+              let skillDif = Math.abs(dummy.experience - e.experience);
+              let skillPoints = pointsAssigner(skillDif);
+              let totalMatchPoints = instPoints + instSotPoints + skillPoints;
+              console.log(`${e.firstName}'s match score is: ${totalMatchPoints}`)
+            })
+            //===================== end forEach function ==========================
+
+            console.log('Match Results:', result)
+            return;
+          }
+          // res.json("The results will be here.");
+        })
+    })
+
+    search();
   },
 
   putABunchInThere: (req, res) => {
@@ -41,7 +99,7 @@ module.exports = {
     const newUsers = [];
     const pickNFromArray = (n, srcArray, destArray) => {
       for (let j = 0; j < rand(n); j++) {
-        let datNumba = rand(srcArray.length-1)
+        let datNumba = rand(srcArray.length - 1)
         let theItem;
         if (srcArray[datNumba]) {
           theItem = srcArray[datNumba].toLowerCase();

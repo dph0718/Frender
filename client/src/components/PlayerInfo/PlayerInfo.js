@@ -58,7 +58,7 @@ class PlayerInfo extends Component {
     // let addInfo = "I'd like to win a few more Grammys. Two isn't enough."
     // let rating = 4;
 
-    //render stars for user's skill level
+    //render stars for user's skill level & rating
     let starray = []
     let star = String.fromCharCode(0x2605);
     for (let i = 1; i <= this.state.experience; i++) {
@@ -86,8 +86,6 @@ class PlayerInfo extends Component {
         default: endeavor = "For some reason, there isn't any aspiration at all here."
     }
 
-    //put a truth meter somewhere in here too, so people can rate other musicians on their honesty about skill level
-    //, or average their skill ratings by other players.
     return (
       <div className="playerInfo">
         <p className="infoBit"><strong>Experience:</strong> <span className="starz"> {starray} </span></p>

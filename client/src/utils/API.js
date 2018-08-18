@@ -76,6 +76,9 @@ export default {
 
   getMatches: () => {
     return axios.get('/api/users/searchUsers')
+    .then(res=>{
+      console.log(res);
+    })
 
   },
   // // Gets the user with the given id
