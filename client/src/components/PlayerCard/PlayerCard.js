@@ -6,17 +6,17 @@ class PlayerCard extends Component {
   state = this.props.prevState;
 
   componentWillReceiveProps(newProps) {
-    if (newProps.loggedIn !== this.props) {
-      console.log('player card NEW PROPS!')
-      this.setState({ state: newProps })
+    if (newProps !== this.props) {
+      console.log('player card NEW PROPS!', newProps)
+      this.setState(  newProps.prevState )
     }
   };
 
   render() {
-    console.log('playerCards state', this.state)
+    console.log('playerCards STATE at RENDER:', this.state)
     return (
       <div className="playerCard">
-        <h2 className="playerName">{this.state.name}</h2>
+        <h2 className="playerName">{this.state.firstName}</h2>
         <img className="playerPic" alt="the user" src={this.state.image} />
       </div>
     )

@@ -19,6 +19,7 @@ const UserSchema = new Schema({
   skillSought: {type: Number},
   unreadMessages: Array,
   readMessages: Array,
+  image: String,
 },
 
   validPassword = function (password) {

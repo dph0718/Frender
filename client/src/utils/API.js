@@ -77,7 +77,9 @@ export default {
   getMatches: () => {
     return axios.get('/api/users/searchUsers')
     .then(res=>{
-      console.log(res);
+      //res.data is an Array of all matched User objects
+      console.log(res.data);
+      return res.data;
     })
 
   },

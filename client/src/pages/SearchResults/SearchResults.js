@@ -1,7 +1,5 @@
 import React, { Component } from "react";
-// import DeleteBtn from "../../components/DeleteBtn";
-// import Jumbotron from "../../components/Jumbotron";
-// import API from "../../utils/API";
+import API from "../../utils/API";
 // import { Link } from "react-router-dom";
 import './searchresults.css';
 import PlayerCard from "../../components/PlayerCard/PlayerCard";
@@ -14,45 +12,65 @@ const divStyle = {
 
 class SearchResults extends Component {
   state = {
-    image: "/images/stickman.png",
-    name: "Stick Man",
-    experience: 4,
-    instrumentArray: ['guitar', 'mandolin', 'kazoo'],
-    genreArray: ['rock', 'folk', 'monster ballads'],
-    influenceArray: ['Talking Heads', 'Naz', 'Waylon Jennings'],
-    endeavour: 2,
-    addInfo: "I'd like to win a few more Grammys. Two isn't enough.",
-    rating: 4,
-  }
-
+    retrieved: false,
+    matchNum: 0,
+  };
 
   nextPlayer = () => {
-    console.log("before:", this.state);
-    this.setState(
-      {
-        image: "/images/guitarist.png",
-        experience: 3,
-        name: "Charles",
-        instrumentArray: ['guitar', 'triangle', 'spoons'],
-        genreArray: ['rock', 'showtunes'],
-        influenceArray: ['Pearl Jam', 'Elton John', 'Barry Manilow'],
-        endeavour: 1,
-        addInfo: "Even with 3 fingers, I can outplay Jason Mraz.",
-        rating: 3,
-      }, () => {
-        console.log('after: the async callback.:', this.state);
-      }
-    );
+    let m = this.state.matchNum;
+    m++;
+    console.log("What's UNDEFINED>>!>?:", this.state.allMatches[m]);
+    for (var prop in this.state.allMatches[m]) {
+      console.log(`${prop} being set to ${this.state.allMatches[m][prop]}.`)
+      this.setState({
+        [prop]: this.state.allMatches[m][prop],
+        matchNum: m,
+      });
+    }
+
   };
 
   render() {
+    console.log(`SearchResults RENDERED`)
+
+    let allMatches = [];
+    let m = this.state.matchNum;
+
+    if (!this.state.retrieved) {
+      API.getMatches()
+        .then((r) => {
+          allMatches = r;
+          console.log("allmatches variable:", allMatches);
+          for (var prop in allMatches[m]) {
+            console.log(`${prop} being set.`)
+            this.setState({
+              allMatches: allMatches,
+              [prop]: allMatches[m][prop],
+              retrieved: true,
+              matchNum: m,
+            });
+          };
+          setTimeout(console.log("SearchResults STATE:", this.state), 2000);
+        });
+    }
+    else {
+
+      //   matchNum++;
+      //   console.log("What's UNDEFINED>>!>?:", allMatches[1]);
+      //   for (var prop in allMatches[parseInt(matchNum)]) {
+      //     console.log(`${prop} being set.`)
+      //     this.setState({
+      //       [prop]: allMatches[matchNum][prop],
+      //     });
+      //   };
+    };
+
     return (
       <div className="fullPage"
         style={divStyle}>
         <div className="infoContainer">
           <PlayerCard
             prevState={this.state}
-            image={this.state.image}
             className='playerCard' />
           <PlayerInfo
             click={this.nextPlayer}

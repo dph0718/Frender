@@ -155,6 +155,10 @@ class ProfileForm extends Component {
             <option name="endeavors" value="3">Let's just see what happens...</option>
           </select>
 
+          <h3>Got a decent pic?</h3>
+          <input statename="image" name="image" defaultValue={this.state.image } />
+
+
           <h3>Anything else?</h3>
           <textarea name='etCetera'
             value={this.state.etCetera}></textarea>

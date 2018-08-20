@@ -4,12 +4,19 @@ import YesNoButton from "../YesNoButton/YesNoButton";
 
 //takes the arrays and makes them readable.
 const sentencify = (arr) => {
-  let sentence = arr.slice(0, arr.length - 1).join(', ') + ", and " + arr.slice(-1);
-  let listSent = sentence.charAt(0).toUpperCase() + sentence.substr(1)
-  return listSent;
-}
-
-
+  if (arr) {
+    let sentence;
+    if (arr.length > 2) {
+      sentence = arr.slice(0, arr.length - 1).join(', ') + ", and " + arr.slice(-1);
+    } else if (arr.length == 2) {
+      sentence = arr.slice(0, arr.length - 1).join(', ') + " and " + arr.slice(-1);
+    } else if (arr.length < 2) {
+      sentence = `${arr[0]}`;
+    }
+    let listSent = sentence.charAt(0).toUpperCase() + sentence.substr(1)
+    return listSent;
+  } else return;
+};
 
 const yesButton = "/images/lesdudis.png";
 const noButton = "/images/notmyjam.png";
@@ -17,29 +24,12 @@ const noButton = "/images/notmyjam.png";
 class PlayerInfo extends Component {
   state = this.props.prevState;
 
-  // {
-  //   experience: 4,
-  //   instrumentArray: ['guitar', 'mandolin', 'kazoo'],
-  //   genreArray: ['rock', 'folk'],
-  //   influenceArray: ['Talking Heads', 'Naz', 'Waylon Jennings'],
-  //   endeavour: 2,
-  //   addInfo: "I'd like to win a few more Grammys. Two isn't enough.",
-  //   rating: 4,
-  // }
-
-  // nextPlayer = () => {
-  //   this.setState(
-  //     {
-  //       experience: 3,
-  //       instrumentArray: ['guitar', 'triangle', 'spoons'],
-  //       genreArray: ['rock', 'showtunes'],
-  //       influenceArray: ['Pearl Jam', 'Elton John', 'Barry Manilow'],
-  //       endeavour: 0,
-  //       addInfo: "Even with 3 fingers, I can outplay Jason Mraz.",
-  //       rating: 3,
-  //     }
-  //   );
-  // }
+  componentWillReceiveProps(newProps) {
+    if (newProps !== this.props) {
+      console.log('player INFO NEW PROPS!')
+      this.setState(newProps.prevState)
+    }
+  };
 
   doClick = () => {
     console.log('player info.js onClick method.')
@@ -48,20 +38,12 @@ class PlayerInfo extends Component {
     this.forceUpdate();
   }
   render() {
-
-    //pass in props on each iteration to define the variables:
-    // let experience = 4;
-    // let instrumentArray = ['guitar', 'mandolin', 'kazoo'];
-    // let genreArray = ['rock', 'folk'];
-    // let influenceArray = ['Talking Heads', 'Naz', 'Waylon Jennings'];
-    // let endeavour = 2;
-    // let addInfo = "I'd like to win a few more Grammys. Two isn't enough."
-    // let rating = 4;
+    console.log(`PlayerInfo STATE at render: ${this.state}`)
 
     //render stars for user's skill level & rating
     let starray = []
     let star = String.fromCharCode(0x2605);
-    for (let i = 1; i <= this.state.experience; i++) {
+    for (let i = 1; i <= parseInt(this.state.experience); i++) {
       starray.push(star)
     };
     let rateArray = [];
@@ -70,20 +52,20 @@ class PlayerInfo extends Component {
     };
 
     //some code for making the arrays readable.
-    const instruments = sentencify(this.state.instrumentArray);
-    const genres = sentencify(this.state.genreArray);
-    const influences = sentencify(this.state.influenceArray);
+    const instruments = sentencify(this.state.instruments);
+    const genres = sentencify(this.state.genres);
+    const influences = sentencify(this.state.influences);
 
     //translate the endeavor to something readable.
-    let endeavor;
-    switch (this.state.endeavour) {
+    let endeavor = parseInt(this.state.endeavors);
+    switch (endeavor) {
       case 1: endeavor = "Write music.";
         break;
       case 2: endeavor = "Do covers.";
         break;
       case 3: endeavor = "Just see what happens.";
         break;
-        default: endeavor = "For some reason, there isn't any aspiration at all here."
+      default: endeavor = "For some reason, there isn't any aspiration at all here."
     }
 
     return (
