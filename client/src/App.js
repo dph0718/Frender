@@ -8,6 +8,7 @@ import SearchResults from "./pages/SearchResults";
 import ProfileEdit from "./pages/ProfileEdit";
 import Home from "./pages/Home";
 import API from "./utils/API";
+import GoLogIn from "./pages/GoLogIn/GoLogIn";
 
 
 const colorStyle = {
@@ -41,17 +42,17 @@ class App extends Component {
   };
 
   componentDidMount() {
-    console.log("App Mounted!")
+    // console.log("App Mounted!")
   }
 
   grabLoggedState = (compProp) => {
     this.setState({ loggedIn: compProp })
-    console.log('grabbed the state from:', compProp)
+    // console.log('grabbed the state from:', compProp)
   };
 
 
   render() {
-    console.log('Begin App Render...')
+    // console.log('Begin App Render...')
     return (
       <Router>
         <div style={colorStyle}>
@@ -82,6 +83,7 @@ class App extends Component {
             <Route exact path="/search" component={SearchResults} />
             <Route exact path="/success" component={Home} />
             <Route exact path="/page/html/search" component={Home} />
+            <Route exact path="/gologin" component={GoLogIn} />
             <Route component={NoMatch} />
           </Switch>
         </div>

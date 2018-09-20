@@ -9,7 +9,7 @@ class Nav extends Component {
   state = {
     loggedIn: this.props.loggedIn,
     redirect: false
-  }
+  };
 
   componentDidMount() {
     API.doesUserExist().then(res => {
@@ -17,13 +17,13 @@ class Nav extends Component {
         this.setState({ loggedIn: true })
       } else {
       }
-    })
-  }
+    });
+  };
 
   componentWillReceiveProps(newProps) {
     if (newProps.loggedIn !== this.props.loggedIn) {
       this.setState({ loggedIn: newProps.loggedIn })
-    }
+    };
   };
 
   hitSwitch = () => {
@@ -32,7 +32,7 @@ class Nav extends Component {
       this.props.giveState(this.state.loggedIn);
       this.setState({ redirect: true });
     });
-  }
+  };
 
   render() {
     const loggedIn = this.state.loggedIn;
@@ -54,16 +54,19 @@ class Nav extends Component {
               loggedIn={loggedIn} />
           </Link>
         )
-      }
+      };
     };
 
+    //Once the "Logout" switch is hit, it redirects back to the Login page
+    //capital R means it's a react component/element. gotta put it within render
+        //and unless we're redirecting, it returns 'null' so nothing happens.
     const Redirection = () => {
       if (this.state.redirect) {
         this.setState({ redirect: false });
         return <Redirect to="/login" />;
       } else
         return null;
-    }
+    };
     
     return (
       <nav className="navbar" >
@@ -76,6 +79,6 @@ class Nav extends Component {
         <Redirection />
       </nav>
     )
-  }
-}
+  };
+};
 export default Nav;

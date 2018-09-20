@@ -15,13 +15,30 @@ class ProfileForm extends Component {
     email: "",
     experience: undefined,
     instruments: [],
+    instrumentsSought: [],
     influences: [],
     genres: [],
     endeavors: "",
     etCetera: "",
+    formErrors: {
+      firstName: ``,
+      lastName: ``,
+      instruments: ``,
+      instrumentsSought: ``,
+      influences: ``,
+      genres: ``,
+    },
+    formValid: false,
+    firstNameValid: false,
+    lastNameValid: false,
+    instrumentsValid: false,
+    instrumentsSoughtValid: false,
+    influencesValid: false,
+    genresValid: false,
   };
 
   // handle any changes to the input fields
+  //while validating data
   handleInputChange = event => {
     // Pull the name and value properties off of the event.target (the element which triggered the event)
     const { name, value } = event.target;
@@ -29,25 +46,75 @@ class ProfileForm extends Component {
     this.setState({
       [name]: value,
     }, () => {
-      console.log(this.state);
+      this.validateField(name, value)
     });
+  };
+
+  validateField = (fieldName, value) => {
+    let fieldErrors = this.state.formErrors;
+    let firstNameValid = this.state.firstNameValid;
+    let lastNameValid = this.state.lastNameValid;
+    let instrumentsValid = this.state.firstNameValid;
+    let instrumentsSoughtValid = this.state.instrumentsSoughtValid;
+    let influencesValid = this.state.influencesValid;
+    let genresValid = this.state.genresValid;
+    console.log(this.state.formErrors)
+    console.log(this.state.formValid)
+    console.log(this.state.instrumentsSought[0])
+    switch (fieldName) {
+      case 'firstName': firstNameValid = value.length > 0;
+        fieldErrors.firstName = firstNameValid ? '' : 'first name required';
+        break;
+      case 'lastName': lastNameValid = value.length > 0;
+        fieldErrors.lastName = lastNameValid ? '' : 'last name required';
+        break;
+      case 'instruments': instrumentsValid = this.state.instruments.length > 0;
+        fieldErrors.instruments = instrumentsValid ? '' : 'at least one instrument required';
+        break;
+      case 'instrumentsSought': instrumentsSoughtValid = this.state.instrumentsSought.length > 0;
+        fieldErrors.instrumentsSought = instrumentsSoughtValid ? '' : `they've gotta play something.`;
+        break;
+      case 'influences': influencesValid = this.state.influences.length > 0;
+        fieldErrors.influences = influencesValid ? '' : 'not even the Beatles?';
+        break;
+      case 'genres': genresValid = value.length > 0;
+        fieldErrors.genres = genresValid ? '' : 'one genre required.';
+        break;
+    }
+    this.setState({
+      formErrors: fieldErrors,
+      firstNameValid: firstNameValid,
+      lastNameValid: lastNameValid,
+      instrumentsValid: instrumentsValid,
+      instrumentsSoughtValid: instrumentsSoughtValid,
+      influencesValid: influencesValid,
+      genresValid: genresValid,
+    }, this.validateForm);
+  };
+
+  validateForm = () => {
+    this.setState({
+      formValid: this.state.firstNameValid
+        && this.state.lastNameValid
+        && this.state.instrumentsValid
+        && this.state.instrumentsSoughtValid
+        && this.state.influencesValid
+        && this.state.genresValid
+    })
   };
 
   //We need to get the user's info and populate the input fields with 
   //data already associated with the user\
-  //THIS IS WHERE IT BROKE LAST TIME 
   componentDidMount() {
     API.getUserInfo(this).then(res => {
       console.log("PROFILE FORM'S STATE:")
       console.log(this.state);
-      console.log(typeof (this.state.experience))
     });
-  }
+  };
 
-  //here we gotta post this stuff to the user's mongodb document
+  //post this info to the user's mongodb document
   handleFormSubmit = event => {
     event.preventDefault();
-    console.log("Attempting the updateProfile route...")
     API.updateProfile(this.state).then(res => {
     })
   };
@@ -57,22 +124,29 @@ class ProfileForm extends Component {
     this.setState({
       [name]: theState,
     })
-  }
+  };
+
 
   render() {
 
+    //sets initial values for <select> inputs to the user's info; or if none, to 3.
+    //sets the state so if values are not changed, there will be data submitted in the state. 
+    let initSelectVal = (theProp) => {
+      if (this.state[theProp]) {
+        return this.state[theProp]
+      } else {
+        this.setState({ [theProp]: 3 });
+        return 3;
+      };
+    };
+
     return (
       <div className='profileEditor'>
-      <button onClick={API.getMatches}> SEARCH
-        </button>
-      <button onClick={API.makeABunch}> MAKE
-        </button>
-      <button onClick={API.deleteDummies}> Delete DUMMIES
-        </button>
+        <div id='scrollBlocker'></div>
+
         <form
           id='profileForm'
           onChange={this.handleInputChange}>
-
 
           <h1> The World is Your Stage,</h1>
           <h3>Or something profound like that.</h3>
@@ -84,10 +158,10 @@ class ProfileForm extends Component {
           <input name="lastName" type='text' defaultValue={this.state.lastName} />
 
           <h3>Email</h3>
-          <input name="email" type='text' defaultValue={this.state.email} />
+          <input name="email" type='email' defaultValue={this.state.email} />
 
           <h3>Your experience level</h3>
-          <select name="experience" value={this.state.experience || '2'}>
+          <select name="experience" value={initSelectVal('experience')}>
             <option name="experience" value="1">I'm awful, but I'm trying.</option>
             <option name="experience" value="2">I'm ... Ok?</option>
             <option name="experience" value="3">I'm good. Not great, but I'm good. </option>
@@ -96,7 +170,7 @@ class ProfileForm extends Component {
           </select>
 
           <h3>You're willing to play with someone who at least:</h3>
-          <select name="skillSought" value={this.state.skillSought || '1'}>
+          <select name="skillSought" value={initSelectVal('skillSought')}>
             <option name="skillSought" value="1">knows what their instrument is called.</option>
             <option name="skillSought" value="2">can play something vaguely familiar.</option>
             <option name="skillSought" value="3">won't blow you away, but can keep up. </option>
@@ -120,9 +194,9 @@ class ProfileForm extends Component {
             gimmeDat={this.gimmeDat}
             title='sought instrument'
             formTitle="You're looking to jam with someone who plays:"
-            ex0='E.g., another guitar'
-            ex1='more bagpipes'
-            ex2='bass oboe'
+            ex0='E.g., castanets'
+            ex1='cuica'
+            ex2='bassoon'
             placeholder="Shotgun approach. I like it."
             items={this.state.instrumentsSought} />
 
@@ -149,14 +223,14 @@ class ProfileForm extends Component {
             items={this.state.genres} />
 
           <h3>Creative endeavors</h3>
-          <select name="endeavors" value={this.state.endeavors || '3'}>
+          <select name="endeavors" value={initSelectVal('endeavors')}>
             <option name="endeavors" value="1">I just want to write music.</option>
             <option name="endeavors" value="2">I want to play some covers.</option>
             <option name="endeavors" value="3">Let's just see what happens...</option>
           </select>
 
           <h3>Got a decent pic?</h3>
-          <input statename="image" name="image" defaultValue={this.state.image } />
+          <input statename="image" name="image" defaultValue={this.state.image} />
 
 
           <h3>Anything else?</h3>
@@ -165,6 +239,12 @@ class ProfileForm extends Component {
           <button type='submit'
             onClick={this.handleFormSubmit}>Create Profile</button>
         </form>
+        {/* <button onClick={API.getMatches}> SEARCH
+        </button>
+          <button onClick={API.makeABunch}> MAKE
+        </button>
+          <button onClick={API.deleteDummies}> Delete DUMMIES
+        </button> */}
       </div>
     );
   }

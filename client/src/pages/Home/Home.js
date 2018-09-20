@@ -16,14 +16,17 @@ class Home extends Component {
   };
 
   componentDidMount() {
-    //in here, set state to the user's info -- use a route?
-    API.getUserInfo(this);
-    // AmpSwitch.setState({on: true})
+    API.getUserInfo(this).then(() => {
+      if (this.state.firstName == null) {
+        this.setState({incomplete: true})
+      }
+    });
   }
 
   render() {
-    console.log('HOME has begun to render')
-    if (this.state.loggedIn) {
+    // console.log('HOME has begun to render')
+    if (this.state.incomplete == true) {
+      console.log("no name, && incomplete, so REDIRECTING TO profile")
       return <Redirect to="/profile" />
     }
     return (

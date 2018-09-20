@@ -15,7 +15,8 @@ class Login extends Component {
   state = {
     email: "",
     password: "",
-    loggedIn: this.props.loggedIn
+    loggedIn: this.props.loggedIn,
+    incomplete: false
   };
 
   componentWillReceiveProps(newProps) {
@@ -26,22 +27,28 @@ class Login extends Component {
   //sends a post method to create user.
   signUp = (e) => {
     e.preventDefault();
-    API.createUser(this.state);
+    API.createUser(this.state).then(() => {
+      console.log('created user, now trying to log in using same info.')
+      this.logIn();
+    });
   };
 
   logIn = (event) => {
-    event.preventDefault();
+    if (event) {
+      event.preventDefault();
+    };
     API.logInUser(this.state)
       .then(res => {
         if (res) {
           this.setState({ loggedIn: true })
           //giveState = grabLoggedState from App.js
-          this.props.giveState(this.state.loggedIn)
+          this.props.giveState(this.state.loggedIn);
+
         } else {
           console.log('was no "RES" from logInUser. :(')
         }
       });
-  }
+  };
 
   handleInputChange = event => {
     // Pull the name and value properties off of the event.target (the element which triggered the event)
@@ -50,7 +57,6 @@ class Login extends Component {
     this.setState({
       [name]: value
     }, () => {
-      //Not doing nothin in here. Yet.
     });
   };
 
@@ -58,7 +64,11 @@ class Login extends Component {
     //if they have info, Redirect to /home, 
     //if not, redirect to /profile
     if (this.state.loggedIn) {
-      return <Redirect to="/profile" />
+      {
+        // return <Redirect to="/profile" />
+        return <Redirect to="/home" />
+        // [ ] Redirect to /profile from Home if their info is incomplete
+      }
     }
     return (
       <div className="fullPage"

@@ -5,6 +5,7 @@ module.exports = function(req, res, next) {
     return next();
   }
 
-  // If the user isn't logged in, redirect them to the login page
-  return res.redirect("/page/html/unfortunate");
+  console.log('nice try, BOZO')
+  // If the user isn't logged in, redirect them to the GoLogIn page
+  return res.send("negativeGhostRider");
 };

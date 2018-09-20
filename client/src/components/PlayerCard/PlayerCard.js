@@ -7,13 +7,13 @@ class PlayerCard extends Component {
 
   componentWillReceiveProps(newProps) {
     if (newProps !== this.props) {
-      console.log('player card NEW PROPS!', newProps)
+      // console.log('player card NEW PROPS!', newProps)
       this.setState(  newProps.prevState )
     }
   };
 
   render() {
-    console.log('playerCards STATE at RENDER:', this.state)
+    // console.log('playerCards STATE at RENDER:', this.state)
     return (
       <div className="playerCard">
         <h2 className="playerName">{this.state.firstName}</h2>

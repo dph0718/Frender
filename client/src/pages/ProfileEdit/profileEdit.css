@@ -1,9 +1,11 @@
 .fullPage {
-    width: 100vw;
+    width: 99vw;
     height: 75vw;
     background-image: 'url(/images/FrenderAmp.png)';
     background-size: 100% 100%;
+    overflow-x: hidden;
 }
+
 
 /* .profileEditor {
     width: 100%;

@@ -4,16 +4,17 @@
 }
 
 .navbar {
-    width: 100vw;
+    width: 99vw;
     background-color: black;
     background-image: url('/images/brushedgold.png');
-    background-size: 100% 100%;
+    background-size: 100% 50%;
     display: flex;
     justify-content: space-around;
     border: 8px black solid;
     box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.5) inset;
     border-radius: 16px;
     height: 10vw;
+    overflow: hidden;
 }
 
 .clickable:hover {

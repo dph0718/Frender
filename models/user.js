@@ -6,26 +6,27 @@ const SALT_WORK_FACTOR = 10;
 const UserSchema = new Schema({
   password: String,
   email: String,
-  firstName: { type: String },
-  lastName: { type: String },
+  firstName: {type: String, default: null},
+  lastName: String,
   experience: String,
-  instruments: {type: Array},
-  influences: {type: Array},
-  genres: {type: Array},
-  dateUpdated: { type: Date, default: Date.now },
+  instruments: { type: Array },
+  influences: { type: Array },
+  genres: { type: Array },
+  dateUpdated: { type: Date, default: Date.now() },
   endeavors: String,
   etCetera: String,
-  instrumentsSought: {type: Array},
-  skillSought: {type: Number},
+  instrumentsSought: { type: Array },
+  skillSought: { type: Number },
   unreadMessages: Array,
   readMessages: Array,
   image: String,
+  complete: Boolean,
 },
 
-  validPassword = function (password) {
-    console.log('validating password...', password)
-    return bcrypt.compareSync(password, this.password);
-  }
+  // validPassword = function (password) {
+  //   console.log('validating MEOW password...', password)
+  //   return bcrypt.compareSync(password, this.password);
+  // }
 );
 
 UserSchema.pre('save', function (next) {
@@ -52,7 +53,19 @@ UserSchema.pre('save', function (next) {
 UserSchema.methods.validPassword = function (password) {
   console.log('validating password...', password)
   return bcrypt.compareSync(password, this.password)
-}
+};
+
+UserSchema.methods.completeProfile = function () {
+  if (this.firstName &&
+    this.lastName &&
+    this.experience &&
+    this.instruments &&
+    this.genres &&
+    this.endeavors &&
+    this.influences) {
+
+  }
+};
 // UserSchema.prototype.comparePassword = function (candidatePassword, cb) {
 //   console.log('candPass:', candidatePassword, "this.pass:", this.password);
 //   bcrypt.compare(candidatePassword, this.password, function (err, isMatch) {

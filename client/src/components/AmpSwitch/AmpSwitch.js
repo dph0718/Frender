@@ -21,14 +21,14 @@ class AmpSwitch extends Component {
   componentWillReceiveProps(newProps){
     if(newProps.loggedIn !== this.props.loggedIn){
       this.setState({loggedIn: newProps.loggedIn})
-      console.log("AmpSwitch  received new Props:", this.props.loggedIn)
-      console.log("AmpSwitch setState:", this.state.loggedIn)
+      // console.log("AmpSwitch  received new Props:", this.props.loggedIn)
+      // console.log("AmpSwitch setState:", this.state.loggedIn)
     }
   };
 
   render() {
-    console.log(`Ampswitch is Rendering----`)
-    console.log(`Its state.loggedIn is currently:`, this.state.loggedIn)
+    // console.log(`Ampswitch is Rendering----`)
+    // console.log(`Its state.loggedIn is currently:`, this.state.loggedIn)
     let button;
     let logLabel;
 

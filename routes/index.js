@@ -12,8 +12,8 @@ router.use('/page', htmlRoutes);
 //testing...
 router.use('/home', isAuthenticated, (req, res) => {
   let user = {};
-  for (var prop in req.user){
-    if(prop !== "password"){
+  for (var prop in req.user) {
+    if (prop !== "password") {
       user[prop] = req.user[prop]
     }
   }
@@ -22,6 +22,13 @@ router.use('/home', isAuthenticated, (req, res) => {
   //   email: req.user.email,
   //   id: req.user._id
   // })
+})
+
+//isAuthenticated took care of this. no redirect.
+router.use('/unfortunate', (req, res) => {
+  console.log(`Someone's trying to search without logging in.`);
+//on the front end, if this is sent, it knows to redirect to a sad page about not being logged in.
+  res.send("negativeGhostRider")
 })
 
 // If no API routes are hit, send the React app

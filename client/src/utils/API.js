@@ -23,20 +23,27 @@ export default {
       })
   },
 
+  //logs out user
   logoutUser: () => {
     return axios.post('/api/users/logout').then(res => {
       return
     })
   },
 
+  //gets user info for display & form filling
   getUserInfo: (component) => {
-    //gotta rename & file this route.
-    return axios.get('/home').then(res => {
+    return axios.get('/api/users/getUser').then(res => {
+      console.log('DATA from getUserInfo API')
+      console.log(res.data);
+
       for (var prop in res.data) {
         component.setState({
           [prop]: res.data[prop]
         })
       }
+
+
+
       // component.setState({
       //   email: res.data.email,
       //   id: res.data.id
@@ -44,6 +51,11 @@ export default {
     })
   },
 
+
+
+
+
+  //These routes access the database=======================
   doesUserExist: () => {
     return axios.get('/api/users')
       .then(res => {
@@ -58,41 +70,29 @@ export default {
       })
   },
 
-  makeABunch: ()=>{
+  makeABunch: () => {
     return axios.get('/api/users/makeUsers')
-    .then(res=>{
-      console.log("This should be a long list of _id's:", res.data);
-    })
-    // console.log('we already populated the db.')
-  }, 
+      .then(res => {
+        console.log(`${res.data.length} Documents added to Collection`);
+      })
+  },
 
-  deleteDummies: ()=>{
+  deleteDummies: () => {
     return axios.delete('/api/users/deleteDummies')
-    .then(res=>{
-      console.log("Dummies deleted!")
-    })
+      .then(res => {
+        console.log("Dummies deleted!")
+      })
 
   },
 
   getMatches: () => {
     return axios.get('/api/users/searchUsers')
-    .then(res=>{
-      //res.data is an Array of all matched User objects
-      console.log(res.data);
-      return res.data;
-    })
-
+      .then(res => {
+        //isAuthenticated is middleware in this route;
+        //if successful, 
+        //res.data is an Array of all matched User objects
+        console.log(res.data);
+        return res.data;
+      })
   },
-  // // Gets the user with the given id
-  // getUser: function (id) {
-  //   return axios.get("/api/users/" + id);
-  // },
-  // // Deletes the book with the given id
-  // deleteBook: function (id) {
-  //   return axios.delete("/api/books/" + id);
-  // },
-  // // Saves a book to the database
-  // saveBook: function (bookData) {
-  //   return axios.post("/api/books", bookData);
-  // },
 };

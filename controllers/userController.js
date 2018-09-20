@@ -1,4 +1,5 @@
 const db = require("../models");
+const util = require("./controllerUtils")
 
 // Defining methods for the Users Controller
 module.exports = {
@@ -15,30 +16,57 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
 
+  //gets the current user's data from the DB (to keep frontend profile info up to date)
+  getUser: (req, res) => {
+    db.User
+      .findOne({ _id: req.user._id })
+      .then(result => {
+        let user = {};
+        for (var prop in result) {
+          if (prop !== "password") {
+            user[prop] = result[prop];
+          }
+        }
+        res.json(user);
+      })
+
+  },
+
   //enters, or updates, a user's data from the profile edit form
   update: (req, res) => {
 
-    console.log("IN DA UPDATE")
+    console.log(`req.user++++++++++++++++++++++++++++++++++++++`);
     console.log(req.user);
+    console.log(`req.body====================================`);
     console.log(req.body);
+    console.log(`##########################################`);
     db.User
       .findOne({ _id: req.user._id })
-      // .findOne({ _id: req.user._id })
       .then(result => {
         let updatedUser = {};
-        console.log('within update:, doing db.find, and getting:', result)
-        console.log('result.email:', result.email)
         for (var prop in req.body) {
-          // for (var prop in req.user) {
-          console.log('properdad:', prop)
-          console.log('THE req.body PROP::', `${req.body[prop]}`)
+          console.log(`THE req.body ${prop}:: ${req.body[prop]}`)
+          let cleanData;
+          if (prop == `dateUpdated`) {
+            cleanData = Date.now();
+          } else
+            if ((prop == `instruments`)
+              || (prop == `instrumentsSought`)
+              || (prop == `genres`)
+              || (prop == `influences`)) {
+              cleanData = util.sanitize(req.body[prop]);
+            }
+            else cleanData = req.body[prop];
+          console.log(`THE sanitized entry: req.body[${prop}]:: ${cleanData}`)
+          console.log(`THE UNsanitized entry: req.body[${prop}]:: ${req.body[prop]}`)
           if (req.body[prop]) {
-            if (result[prop] == req.body[prop]) {
-              console.log('a continued prop !!**!!**');
+            // if (result[prop] == req.body[prop]) {
+            if (result[prop] == cleanData) {
+              console.log(`No change to ${prop}`);
             }
             else {
-              console.log(`The new and old are not the same, we have to update it.`)
-              db.User.findOneAndUpdate({ _id: req.user._id }, { [prop]: req.body[prop] })
+              console.log(`${prop} was: ${result[prop]}; Changed to: ${cleanData}`)
+              db.User.findOneAndUpdate({ _id: req.user._id }, { [prop]: cleanData })
                 .then(updateRes => {
                   //new, not broken...
                   updatedUser[prop] = updateRes[prop]
@@ -57,7 +85,7 @@ module.exports = {
   getMatches: (req, res) => {
     // [ ] Replace dummy with req.user after testing
     const dummy = {
-      instrumentsSought: ['bass', 'piano', 'trombone'],
+      instrumentsSought: ['guitar', 'piano', 'trombone'],
       instruments: ['keyboard', 'guitar', 'bass'],
       skillSought: 1,
       influences: ['pearl jam', 'brooks & dunn', `beatles`, "waylon jennings"],
@@ -262,7 +290,7 @@ module.exports = {
       let randInstSot = pickNFromArray(3, dummyData.shortList, instSotArray);
       let randGenres = pickNFromArray(3, dummyData.genres, genArray);
       let randInflus = pickNFromArray(5, dummyData.influences, influArray);
-      let randImage = dummyData.images[rand(dummyData.images.length-1)];
+      let randImage = dummyData.images[rand(dummyData.images.length - 1)];
 
       let newUser = {
         firstName: rand1Name,

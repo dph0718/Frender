@@ -26,19 +26,20 @@ class PlayerInfo extends Component {
 
   componentWillReceiveProps(newProps) {
     if (newProps !== this.props) {
-      console.log('player INFO NEW PROPS!')
+      // console.log('player INFO NEW PROPS!')
       this.setState(newProps.prevState)
     }
   };
 
   doClick = () => {
-    console.log('player info.js onClick method.')
+    // console.log('player info.js onClick method.')
     this.props.click();
     this.setState(this.props.prevState);
     this.forceUpdate();
   }
+  
   render() {
-    console.log(`PlayerInfo STATE at render: ${this.state}`)
+    // console.log(`PlayerInfo STATE at render: ${this.state}`)
 
     //render stars for user's skill level & rating
     let starray = []

@@ -1,18 +1,37 @@
 
 #profileForm {
   position: relative;
-  border: 8px gray solid;
-  width: 38vw;
-  height: 400px;
+  border: 12px gray solid;
+  border-radius: 5%;
+  width: 50vw;
+  height: 45vw;
   top: 28px;
-  padding: 20px;
-  text-align: center;
+  padding: 5%;
+  text-align: left;
   background-color: rgba(68, 232, 182, 0.5);
-  box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.5);
    overflow-y: scroll;
+   overflow-x: hidden;
+  /* box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.5); */
+  text-shadow: -5px -5px 3px  rgba(0, 0, 0, 0.2), 5px -5px 3px  rgba(0, 0, 0, 0.2);
+   box-shadow:-50px -30px 50px 50px rgba(0, 0, 0, 0.5), 50px -30px 50px 50px rgba(0, 0, 0, 0.5)
+}
+
+#scrollBlocker {
+  pointer-events: none;
+  position: absolute;
+  border: 12px gray solid;
+  border-radius: 5%;
+  width: 50vw;
+  height: 45vw;
+  top: 28px;
+  left: 40%;
+  padding: 5%;
+  z-index: 3;
 }
 
 .profileEditor {
+  font-size: 2vw;
+  font-family: 'reenie beanie';
   width: 100%;
   height: inherit;
   position: relative;
@@ -20,4 +39,9 @@
   display: flex;
   justify-content: space-around;
   align-items: flex-start;
+}
+p, h3, h1, h2, legend {
+  font-family: 'indie flower';
+  margin-top: 3%;
+
 }
