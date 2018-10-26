@@ -1,4 +1,5 @@
-# Frender
+# [I'm an inline-style link with title](https://www.google.com "earlier version Heroku deploy")
+
 provides musicians with profiles and contacts of other musicians of complementary instruments, style preferences, and ability.
 
 
@@ -11,7 +12,4 @@ provides musicians with profiles and contacts of other musicians of complementar
   * then `yarn start`
   
 * In a browser, go to `localhost:3000`
-
-
-[An earlier deployment](https://frender-app.herokuapp.com/)
 
