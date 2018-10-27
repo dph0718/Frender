@@ -1,4 +1,4 @@
-# [Frender](https://www.google.com "earlier version Heroku deploy")
+# [Frender](https://frender-app.herokuapp.com/ "earlier version Heroku deploy")
 
 provides musicians with profiles and contacts of other musicians of complementary instruments, style preferences, and ability.
 
