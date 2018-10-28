@@ -7,16 +7,16 @@ const bgImg = '/images/frenderAmp-large.png';
 const divStyle = {
   backgroundImage: 'url(' + bgImg + ')',
 };
-const formStyle = {
-  backgroundImage: 'url(/images/backstagepass.png)',
-}
+
 
 class Login extends Component {
   state = {
     email: "",
     password: "",
     loggedIn: this.props.loggedIn,
-    incomplete: false
+    incomplete: false,
+    bottom: '100vw',
+    droppedIn: false,
   };
 
   componentWillReceiveProps(newProps) {
@@ -24,6 +24,19 @@ class Login extends Component {
       this.setState({ loggedIn: newProps.loggedIn })
     }
   };
+
+  componentDidMount() {
+    if (this.state.droppedIn === false) {
+      setTimeout(() => {
+        console.log('it did mount, did it drop in?')
+      this.dropIn();      
+      }, 200);
+
+
+    } else {
+      console.log('this.state.droppedIn is true');
+    }
+  }
   //sends a post method to create user.
   signUp = (e) => {
     e.preventDefault();
@@ -33,6 +46,17 @@ class Login extends Component {
     });
   };
 
+  dropIn = () => {
+    setTimeout(() => {
+      this.setState({
+        droppedIn: true,
+        bottom: '4vw'
+      })
+      console.log('well, it was called at least')
+    }, 50);
+  }
+
+
   logIn = (event) => {
     if (event) {
       event.preventDefault();
@@ -40,6 +64,8 @@ class Login extends Component {
     API.logInUser(this.state)
       .then(res => {
         if (res) {
+          console.log('res')
+          console.log(res)
           this.setState({ loggedIn: true })
           //giveState = grabLoggedState from App.js
           this.props.giveState(this.state.loggedIn);
@@ -61,6 +87,10 @@ class Login extends Component {
   };
 
   render() {
+    let formStyle = {
+      backgroundImage: 'url(/images/backstagepass.png)',
+      bottom: this.state.bottom,
+    }
     //if they have info, Redirect to /home, 
     //if not, redirect to /profile
     if (this.state.loggedIn) {
@@ -73,7 +103,7 @@ class Login extends Component {
     return (
       <div className="fullPage"
         style={divStyle}>
-        <div id='loginForm' style={formStyle}>
+        <div id='loginForm' style={formStyle} top={this.state.bottom}>
           <form
             onChange={this.handleInputChange}>
             <h2>Login</h2>

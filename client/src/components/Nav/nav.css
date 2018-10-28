@@ -17,6 +17,14 @@
     overflow: hidden;
 }
 
+.navbar p {
+    font-family: 'audiowide', 'Arial Narrow', Arial, sans-serif;
+    font-weight: lighter;
+    color: black;
+    text-decoration: none;
+}
+
 .clickable:hover {
     cursor: pointer;
+    text-decoration: none;
 }

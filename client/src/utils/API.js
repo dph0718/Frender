@@ -13,12 +13,16 @@ export default {
   //logs in user
   logInUser: function (data) {
     return axios.post('/api/users/login', data)
-      .then(res => {
+      .then((res) => {
+        console.log('/api/users/login post method"s res:')
+        console.log(res)
         if (res.data) {
-          return "Login was good.!";
+          console.log(res)
+            console.log("Login was good.!");
+            return res.data;
         }
         else {
-          return "Login FAILED."
+          // res.send("Login FAILED.");
         }
       })
   },
@@ -59,6 +63,9 @@ export default {
   doesUserExist: () => {
     return axios.get('/api/users')
       .then(res => {
+        console.log('doesUserExist? ')
+        console.log(res)
+
         return (res.data);
       })
   },

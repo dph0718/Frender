@@ -61,7 +61,7 @@ class ArrayInput extends Component {
               <input type='text' statename={this.props.statename} key={name} name={name} placeholder={this.props.placeholder} ></input><br />
             </div>;
           })}
-          <button id='addInst'
+          <button className ='addInst'
             onClick={this.addAnInput}> Add {this.props.title}</button>
         </fieldset>
       </div>

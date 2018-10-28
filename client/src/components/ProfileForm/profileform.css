@@ -43,5 +43,9 @@
 p, h3, h1, h2, legend {
   font-family: 'indie flower';
   margin-top: 3%;
+}
 
+.addInst{
+  font-family: 'miltonian tattoo';
+  font-size: 0.5em;
 }

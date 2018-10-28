@@ -7,6 +7,7 @@ import './nav.css';
 
 class Nav extends Component {
   state = {
+    //whether or not user's logged in; boolean
     loggedIn: this.props.loggedIn,
     redirect: false
   };
@@ -14,8 +15,11 @@ class Nav extends Component {
   componentDidMount() {
     API.doesUserExist().then(res => {
       if (res) {
+        console.log("Nav's res from doesUserExist:")
+        console.log(res)
         this.setState({ loggedIn: true })
       } else {
+        console.log('or res.send(false) solved our issue?')
       }
     });
   };
@@ -35,8 +39,11 @@ class Nav extends Component {
   };
 
   render() {
-    const loggedIn = this.state.loggedIn;
-
+    let loggedIn = this.state.loggedIn;
+    console.log(`Nav   ---  this.state.loggedIn:`)
+    console.log(this.state.loggedIn)
+    console.log(`Nav   ---  this.props.loggedIn:`)
+    console.log(this.props.loggedIn)
     const AmpSwitchHandler = () => {
       if (loggedIn) {
         return (
