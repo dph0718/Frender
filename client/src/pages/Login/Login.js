@@ -28,13 +28,9 @@ class Login extends Component {
   componentDidMount() {
     if (this.state.droppedIn === false) {
       setTimeout(() => {
-        console.log('it did mount, did it drop in?')
       this.dropIn();      
       }, 200);
-
-
     } else {
-      console.log('this.state.droppedIn is true');
     }
   }
   //sends a post method to create user.
@@ -52,7 +48,6 @@ class Login extends Component {
         droppedIn: true,
         bottom: '4vw'
       })
-      console.log('well, it was called at least')
     }, 50);
   }
 
@@ -64,14 +59,10 @@ class Login extends Component {
     API.logInUser(this.state)
       .then(res => {
         if (res) {
-          console.log('res')
-          console.log(res)
           this.setState({ loggedIn: true })
           //giveState = grabLoggedState from App.js
           this.props.giveState(this.state.loggedIn);
-
         } else {
-          console.log('was no "RES" from logInUser. :(')
         }
       });
   };

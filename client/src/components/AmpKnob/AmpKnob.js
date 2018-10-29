@@ -6,32 +6,65 @@ const ampKnob = '/images/ampKnob.png';
 
 class AmpKnob extends Component {
   state = {
-    active: this.props.activeKnob,
+    activeKnob: this.props.activeKnob,
     label: this.props.label,
-    turnt: false,
-    rotate: '(0deg)',
+    path: this.props.path,
+    active: false,
+    rotate: '33deg',
+  }
+
+
+  componentWillReceiveProps(newProps) {
+    if (newProps.activeKnob !== this.props.activeKnob) {
+      this.setState({ activeKnob: newProps.activeKnob })
+    };
+
+  };
+
+
+  amIActive = () => {
+    if (this.state.active === false) {
+      if (this.state.activeKnob === this.state.path) {
+        this.setState({ active: true, rotate: '333deg' })
+      }
+      else{
+      }
+
+    } else {
+      if (this.state.activeKnob !== this.state.path) {
+        this.setState({ active: false, rotate: '33deg' })
+      } else {
+      }
+    }
   }
 
   clickFunction = () => {
-    console.log('clickFunction in Amn=pknowb')
-    //if it isn't turnt, turn it.
-    if (this.state.turnt == false) {
-      this.setState({ 
-        turnt: true, 
-        rotate: '(90deg)' })
+    this.props.pathChange();
+
+    if (this.state.activeKnob == this.state.label.toLowerCase()) {
+      console.log(`This is the click function called, because the active knob is this one.`)
+    }
+    //if it isn't active, turn it.
+    if (this.state.active == false) {
+      this.setState({
+        active: true,
+        rotate: '(90deg)'
+      })
     }
 
-    //if it is turnt && the activeKnob isn't this one, unturn it.
-    //set turnt to false.
+    //if it is active && the activeKnob isn't this one, unturn it.
+    //set active to false.
   }
 
 
 
   render() {
+    this.amIActive();
     let style = { transform: `rotate( ${this.state.rotate})` }
-
+    console.log('rendering an ampknop:', this.state.label)
     return (
       <div className="knobAndLabel" onClick={this.clickFunction}>
+        {/* <div className="knobAndLabel" onClick={this.props.pathChange}> */}
         <div className="ampKnob clickable">
           <img className="nums" alt="knob numbers" src={ampNums} />
           <img className="knob" alt="amp knob" src={ampKnob} style={style} />

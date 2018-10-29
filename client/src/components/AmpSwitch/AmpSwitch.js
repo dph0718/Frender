@@ -17,10 +17,10 @@ class AmpSwitch extends Component {
   //   let on = this.state.on;
   //   this.setState({ on: !on })
   // }
-  
-  componentWillReceiveProps(newProps){
-    if(newProps.loggedIn !== this.props.loggedIn){
-      this.setState({loggedIn: newProps.loggedIn})
+
+  componentWillReceiveProps(newProps) {
+    if (newProps.loggedIn !== this.props.loggedIn) {
+      this.setState({ loggedIn: newProps.loggedIn })
       // console.log("AmpSwitch  received new Props:", this.props.loggedIn)
       // console.log("AmpSwitch setState:", this.state.loggedIn)
     }
@@ -42,9 +42,9 @@ class AmpSwitch extends Component {
 
     return (
       <div className="knobAndLabel"
-      // hitSwitch = hitSwitch from Login.js
+        // hitSwitch = hitSwitch from Login.js
         onClick={this.props.hitSwitch}
-        >
+      >
         <div className="ampKnob clickable">
           <img className="nums" alt="amp switch" src={button} />
         </div>

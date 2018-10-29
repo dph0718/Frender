@@ -18,6 +18,10 @@
   margin-bottom: 0;
 }
 
+.knob {
+  transition: transform 0.8s ease-out;
+}
+
 /* .knobAndLabel {
   margin: 20px;
 } */

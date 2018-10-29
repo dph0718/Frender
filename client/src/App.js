@@ -38,12 +38,28 @@ const colorStyle = {
 
 class App extends Component {
   state = {
-    loggedIn: false
+    loggedIn: false,
+    activeKnob: "none"
   };
 
   componentDidMount() {
     console.log("App Mounted!")
   }
+
+  didPathChange = () => {
+    console.log('did path change=================================================?')
+    let pathName = (window.location.pathname).replace('/', '');
+    console.log("pathName:", pathName)
+    console.log("this.state.activeKnob:", this.state.activeKnob)
+    if (this.state.activeKnob !== pathName) {
+      console.log('not THEe same')
+      this.setState({ activeKnob: pathName })
+    };
+  };
+
+  grabActiveKnob = (knobActive) => {
+    this.setState({ activeKnob: knobActive })
+  };
 
   grabLoggedState = (compProp) => {
     this.setState({ loggedIn: compProp })
@@ -51,19 +67,26 @@ class App extends Component {
   };
 
 
-  render() {
-    console.log('Begin App Render...')
-    console.log(`this.state.loggedIn:`)
-    console.log(this.state.loggedIn)
+  componentWillMount() {
+    let pathName = (window.location.pathname).replace('/', '');
+    this.setState({ activeKnob: pathName })
+    console.log(this.state.activeKnob)
+  };
 
+
+
+  render() {
     return (
-      <Router>
+      <Router      >
         <div style={colorStyle}>
           <Route path="/"
             render={props =>
               <Nav {...props}
+                activeKnob={this.state.activeKnob}
                 giveState={this.grabLoggedState}
                 loggedIn={this.state.loggedIn}
+                pathChange={this.didPathChange}
+              // onClick={this.didPathChange}
               />} />
           {/* <Nav
             giveState={this.grabLoggedState}

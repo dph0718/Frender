@@ -9,7 +9,8 @@ class Nav extends Component {
   state = {
     //whether or not user's logged in; boolean
     loggedIn: this.props.loggedIn,
-    redirect: false
+    redirect: false,
+    activeKnob: this.props.activeKnob,
   };
 
   componentDidMount() {
@@ -28,7 +29,11 @@ class Nav extends Component {
     if (newProps.loggedIn !== this.props.loggedIn) {
       this.setState({ loggedIn: newProps.loggedIn })
     };
+    if (newProps.activeKnob !== this.props.activeKnob) {
+      this.setState({ activeKnob: newProps.activeKnob })
+    };
   };
+
 
   hitSwitch = () => {
     API.logoutUser().then(res => {
@@ -38,7 +43,12 @@ class Nav extends Component {
     });
   };
 
+
+
+
   render() {
+    // console.log('pathChange called because Nav is rendering......')
+    this.props.pathChange();
     let loggedIn = this.state.loggedIn;
     console.log(`Nav   ---  this.state.loggedIn:`)
     console.log(this.state.loggedIn)
@@ -58,7 +68,8 @@ class Nav extends Component {
           <Link to="/login" >
             <AmpSwitch
               label="Login"
-              loggedIn={loggedIn} />
+              loggedIn={loggedIn}
+            />
           </Link>
         )
       };
@@ -66,7 +77,7 @@ class Nav extends Component {
 
     //Once the "Logout" switch is hit, it redirects back to the Login page
     //capital R means it's a react component/element. gotta put it within render
-        //and unless we're redirecting, it returns 'null' so nothing happens.
+    //and unless we're redirecting, it returns 'null' so nothing happens.
     const Redirection = () => {
       if (this.state.redirect) {
         this.setState({ redirect: false });
@@ -74,15 +85,16 @@ class Nav extends Component {
       } else
         return null;
     };
-    
+
+
     return (
       <nav className="navbar" >
         < AmpSwitchHandler />
-        <Link to="/search"><AmpKnob label="Search" /></Link>
-        <Link to="/profile"><AmpKnob label="Edit Profile" /></Link>
-        <Link to="/"><AmpKnob label="Messages" /></Link>
-        <Link to="/"><AmpKnob label="Matches" /></Link>
-        <Link to="/"><AmpKnob label="Treb" /></Link>
+        <Link to="/search" ><AmpKnob pathChange={this.props.pathChange} activeKnob={this.state.activeKnob} label="Search" path="search"/></Link>
+        <Link to="/profile" ><AmpKnob pathChange={this.props.pathChange} activeKnob={this.state.activeKnob} label="Edit Profile" path="profile"/></Link>
+        <Link to="/messages" ><AmpKnob pathChange={this.props.pathChange} activeKnob={this.state.activeKnob} label="Messages"  path="messages"/></Link>
+        <Link to="/matches" ><AmpKnob pathChange={this.props.pathChange} activeKnob={this.state.activeKnob} label="Matches"  path="matches"/></Link>
+        <Link to="/treb" ><AmpKnob pathChange={this.props.pathChange} activeKnob={this.state.activeKnob} label="Treb"  path="treb"/></Link>
         <Redirection />
       </nav>
     )
