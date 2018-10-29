@@ -8,8 +8,9 @@ provides musicians with profiles and contacts of other musicians of complementar
 * You gotta get Node.js
 * You also need to get MongoDB https://www.mongodb.org/downloads
 * In a console, `mongod`
-* In another console in the root, `npm install`
+* In another console in the root, `yarn install`
   * then `yarn start`
+  *may have to `yarn add bcrypt` if it isn't validating user.
   
 * In a browser, go to `localhost:3000`
 
