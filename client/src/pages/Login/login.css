@@ -25,3 +25,13 @@ form {
     pointer-events: auto;
 
 }
+
+#signUp {
+    color: blue;
+    font-weight: bolder;
+}
+
+#signUp:hover {
+    cursor: pointer;
+}
+

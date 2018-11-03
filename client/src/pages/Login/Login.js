@@ -13,11 +13,15 @@ class Login extends Component {
   state = {
     email: "",
     password: "",
+    confirmPassword: "",
     loggedIn: this.props.loggedIn,
     incomplete: false,
     bottom: '100vw',
     droppedIn: false,
+    confirming: false,
+    passwordsMatch: false,
   };
+
 
   componentWillReceiveProps(newProps) {
     if (newProps.loggedIn !== this.props.loggedIn) {
@@ -28,14 +32,23 @@ class Login extends Component {
   componentDidMount() {
     if (this.state.droppedIn === false) {
       setTimeout(() => {
-      this.dropIn();      
-      }, 200);
+        this.dropIn();
+      }, 300);
     } else {
     }
+  }
+
+
+  checkPasswords = () => {
+    console.log('I called it.')
+    this.setState({ confirming: true, passwordsMatch: false });
+    //check the input of each;
+
   }
   //sends a post method to create user.
   signUp = (e) => {
     e.preventDefault();
+
     API.createUser(this.state).then(() => {
       console.log('created user, now trying to log in using same info.')
       this.logIn();
@@ -73,7 +86,6 @@ class Login extends Component {
     // Set the state for the appropriate input field
     this.setState({
       [name]: value
-    }, () => {
     });
   };
 
@@ -82,6 +94,30 @@ class Login extends Component {
       backgroundImage: 'url(/images/backstagepass.png)',
       bottom: this.state.bottom,
     }
+
+    const PasswordsNoMatch = () => {
+      let password1 = this.state.password;
+      let password2 = this.state.confirmPassword;
+      if (this.state.confirming === true) {
+        if (password1 && this.state.email) {
+          if (password1 !== password2) {
+            return <p>Passwords do not match.</p>
+          } else {
+            return <p>You're good to go! Click 'sign up' again to register.</p>
+          }
+
+        } else return null
+      } else {
+        return null;
+      }
+    }
+
+    let confirmVis = { visibility: 'hidden' };
+    if (this.state.confirming === true) {
+      confirmVis = { visibility: 'visible' }
+    }
+
+
     //if they have info, Redirect to /home, 
     //if not, redirect to /profile
     if (this.state.loggedIn) {
@@ -91,20 +127,24 @@ class Login extends Component {
         // [ ] Redirect to /profile from Home if their info is incomplete
       }
     }
+
     return (
       <div className="fullPage"
         style={divStyle}>
         <div id='loginForm' style={formStyle} top={this.state.bottom}>
-          <form
+          <form id="logFormEl"
             onChange={this.handleInputChange}>
             <h2>Login</h2>
             <h3>Email</h3>
             <input type='text' name='email' id='email' placeholder="email" />
             <h3>Password</h3>
             <input type='password' name='password' id='password' placeholder="password" />
+            <input type='password' onChange={this.checkPasswords} name='confirmPassword' id='confirmPassword' placeholder="Confirm password" style={confirmVis} />
+            <PasswordsNoMatch />
             <p>or
-        <span
-                onClick={this.signUp}> sign up.</span>
+        <span id="signUp"
+                // onClick={this.signUp}> sign up.</span>
+                onClick={this.checkPasswords}> sign up.</span>
             </p>
             <button type='submit'
               onClick={this.logIn}
