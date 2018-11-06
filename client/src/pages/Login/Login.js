@@ -40,10 +40,17 @@ class Login extends Component {
 
 
   checkPasswords = () => {
-    console.log('I called it.')
-    this.setState({ confirming: true, passwordsMatch: false });
-    //check the input of each;
+    this.setState({ confirming: true });
 
+    let password1 = this.state.password;
+    let password2 = this.state.confirmPassword;
+
+    // if (password1 && (password1 === password2) && this.state.passwordsMatch === false) {
+    if (password1 && (password1 === password2)) {
+      this.setState({ passwordsMatch: true })
+    } else {
+      this.setState({ passwordsMatch: false })
+    }
   }
   //sends a post method to create user.
   signUp = (e) => {
@@ -96,22 +103,39 @@ class Login extends Component {
     }
 
     const PasswordsNoMatch = () => {
-      let password1 = this.state.password;
-      let password2 = this.state.confirmPassword;
       if (this.state.confirming === true) {
-        if (password1 && this.state.email) {
-          if (password1 !== password2) {
-            return <p>Passwords do not match.</p>
-          } else {
-            return <p>You're good to go! Click 'sign up' again to register.</p>
+        // if (this.state.passwordsMatch === false) {
+        console.log(this.state.password, this.state.confirmPassword, this.state.passwordsMatch)
+        if (this.state.password !== this.state.confirmPassword) {
+          if (this.state.passwordsMatch === true) {
+            this.setState({ passwordsMatch: false })
           }
+          return <p>Passwords do not match.</p>
+        } else {
+          if (this.state.passwordsMatch === false) {
+            this.setState({ passwordsMatch: true })
+          }
+          return <p>You're good to go! Click 'sign up' again to register.</p>
+        }
 
-        } else return null
+        // if (this.state.confirming === true) {
+        //   if (password1 && this.state.email) {
+        //     if (password1 !== password2) {
+        //       return <p>Passwords do not match.</p>
+        //     } else {
+        //       return <p>You're good to go! Click 'sign up' again to register.</p>
+        //     }
+
+        //   } else return null
+        // } else {
+        //   return null;
+        // }
       } else {
-        return null;
+        return null
       }
     }
 
+    // If the User is signing up, then the password match confirmation will be visible.
     let confirmVis = { visibility: 'hidden' };
     if (this.state.confirming === true) {
       confirmVis = { visibility: 'visible' }
@@ -144,7 +168,7 @@ class Login extends Component {
             <p>or
         <span id="signUp"
                 // onClick={this.signUp}> sign up.</span>
-                onClick={this.checkPasswords}> sign up.</span>
+                onClick={this.state.passwordsMatch ? this.signUp : this.checkPasswords  }> sign up.</span>
             </p>
             <button type='submit'
               onClick={this.logIn}
