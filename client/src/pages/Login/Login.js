@@ -102,20 +102,23 @@ class Login extends Component {
       bottom: this.state.bottom,
     }
 
+    // this message element shows up when user is registering
+    // displays if the passwords match or not.
     const PasswordsNoMatch = () => {
+      let noMatchStyle;
       if (this.state.confirming === true) {
-        // if (this.state.passwordsMatch === false) {
-        console.log(this.state.password, this.state.confirmPassword, this.state.passwordsMatch)
         if (this.state.password !== this.state.confirmPassword) {
           if (this.state.passwordsMatch === true) {
             this.setState({ passwordsMatch: false })
           }
-          return <p>Passwords do not match.</p>
+          noMatchStyle = {color: 'rgb(63, 0, 0)', textShadow: '0px 0px 5px rgba(254, 0, 0, 0.5)'}
+          return <p style={noMatchStyle}>Passwords do not match.</p>
         } else {
           if (this.state.passwordsMatch === false) {
             this.setState({ passwordsMatch: true })
           }
-          return <p>You're good to go! Click 'sign up' again to register.</p>
+          noMatchStyle = {color: 'rgb(0, 63, 16)', textShadow: '0px 0px 5px rgba(50, 205, 50, 0.5'}
+          return <p style={noMatchStyle}>You're good to go! Click 'sign up' again to register.</p>
         }
 
         // if (this.state.confirming === true) {
@@ -141,6 +144,8 @@ class Login extends Component {
       confirmVis = { visibility: 'visible' }
     }
 
+    let greenStyle = { backgroundColor: 'green'};
+
 
     //if they have info, Redirect to /home, 
     //if not, redirect to /profile
@@ -158,19 +163,22 @@ class Login extends Component {
         <div id='loginForm' style={formStyle} top={this.state.bottom}>
           <form id="logFormEl"
             onChange={this.handleInputChange}>
-            <h2>Login</h2>
-            <h3>Email</h3>
-            <input type='text' name='email' id='email' placeholder="email" />
-            <h3>Password</h3>
-            <input type='password' name='password' id='password' placeholder="password" />
-            <input type='password' onChange={this.checkPasswords} name='confirmPassword' id='confirmPassword' placeholder="Confirm password" style={confirmVis} />
-            <PasswordsNoMatch />
-            <p>or
-        <span id="signUp"
+            {/* <h2>Login</h2> */}
+            <div id='emailAndPassword'>
+              <h3>Email</h3>
+              <input type='text' className='logInput' name='email' id='email' placeholder="email" />
+              <h3>Password</h3>
+              <input type='password' className='logInput' name='password' id='password' placeholder="password" />
+              <input type='password' className='logInput' onChange={this.checkPasswords} name='confirmPassword' id='confirmPassword' placeholder="Confirm password" style={confirmVis} />
+              <PasswordsNoMatch />
+            </div>
+
+            <p id="signUp">or
+        <span
                 // onClick={this.signUp}> sign up.</span>
-                onClick={this.state.passwordsMatch ? this.signUp : this.checkPasswords  }> sign up.</span>
+                onClick={this.state.passwordsMatch ? this.signUp : this.checkPasswords}> sign up.</span>
             </p>
-            <button type='submit'
+            <button type='submit' id='loginSubmit'
               onClick={this.logIn}
             >Log In</button>
           </form>

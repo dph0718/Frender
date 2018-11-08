@@ -49,9 +49,7 @@ class SearchResults extends Component {
             this.setState({ redirect: true })
           }
           allMatches = r;
-          // console.log("allmatches variable:", allMatches);
           for (var prop in allMatches[m]) {
-            // console.log(`${prop} being set.`)
             this.setState({
               allMatches: allMatches,
               [prop]: allMatches[m][prop],
@@ -59,7 +57,6 @@ class SearchResults extends Component {
               matchNum: m,
             });
           };
-          // setTimeout(console.log("SearchResults STATE:", this.state), 2000);
         });
     }
     else {

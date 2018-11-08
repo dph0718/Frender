@@ -317,6 +317,7 @@ module.exports = {
   },
 
   //This deletes all the dummy data by checking if there's a password.
+  // (dummies don't have passwords)
   deleteDummies: (req, res) => {
     db.User.deleteMany({ password: null })
       .then(res => {

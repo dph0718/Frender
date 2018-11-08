@@ -18,20 +18,47 @@
     transition: top, bottom 0.5s cubic-bezier(0.15, 1.78,0.28, 0.92);
 }
 
-form {
+#logFormEl {
     position: absolute;
-    bottom: 10%;
+    width: 80%;
+    height: 45%;
+    bottom: 3%;
     left: 15%;
     pointer-events: auto;
+}
 
+#emailAndPassword {
+    position: absolute;
+    top: 10%;
+    width: 100%;
+}
+
+.logInput {
+    width: 80%;
+    height: 10%;
+    left: 15%;
 }
 
 #signUp {
+    position: absolute;
+    bottom: 18%;
+    left: 16%;
+}
+
+#signUp span {
     color: blue;
     font-weight: bolder;
+}
+
+#loginSubmit {
+    position: absolute;
+    color: rebeccapurple;
+    bottom: 10%;
+    left: 16%;
 }
 
 #signUp:hover {
     cursor: pointer;
 }
+
 

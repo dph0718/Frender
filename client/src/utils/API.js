@@ -98,7 +98,6 @@ export default {
         //isAuthenticated is middleware in this route;
         //if successful, 
         //res.data is an Array of all matched User objects
-        console.log(res.data);
         return res.data;
       })
   },
