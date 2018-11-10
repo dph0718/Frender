@@ -1,9 +1,9 @@
 # [Frender](https://frender-app.herokuapp.com/ "earlier version Heroku deploy")
 
 Matches musicians with musicians using their preferred genres, skill level, musical influences, and complementary instruments. 
-
+  
 *_For example_*  
-Angus plays guitar and is looking for a bassist and saxophonist that are professional musicians. He logs onto Frender.
+Angus plays guitar and is looking for a bassist and saxophonist that are professional musicians. He logs onto Frender.  
 Duke plays saxophone professionally and is looking for a guitarist. He also has signed up with Frender.  
   
 Angus hits the 'Search' knob on the Frender Amp.   
