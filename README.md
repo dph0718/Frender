@@ -2,17 +2,17 @@
 
 Matches musicians with musicians using their preferred genres, skill level, musical influences, and complementary instruments. 
 
-*_For example_*
+*_For example_*  
 Angus plays guitar and is looking for a bassist and saxophonist that are professional musicians. He logs onto Frender.
-Duke plays saxophone professionally and is looking for a guitarist. He also has signed up with Frender.
-
-Angus hits the 'Search' knob on the Frender Amp. 
-Compatible musicians will be shown in a carousel-like fashion.
-Duke's profile will eventually show up, revealing his credentials.
-Angus is intrigued, and clicks the "Les Dudis" option. 
-Duke will be informed that Angus desires to play music with him, and can accept the invitation and schedule a time and place for a session to test each others' fit.
-
-Angus and Duke will go on to win 7 Grammys and define the sound of the hard jazz genre for generations to come.
+Duke plays saxophone professionally and is looking for a guitarist. He also has signed up with Frender.  
+  
+Angus hits the 'Search' knob on the Frender Amp.   
+Compatible musicians will be shown in a carousel-like fashion.  
+Duke's profile will eventually show up, revealing his credentials.  
+Angus is intrigued, and clicks the "Les Dudis" option.   
+Duke will be informed that Angus desires to play music with him, and can accept the invitation and schedule a time and place for a session to test each others' fit.  
+  
+Angus and Duke will go on to win 7 Grammys and define the sound of the hard jazz genre for generations to come.  
 
 
 
