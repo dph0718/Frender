@@ -26,3 +26,29 @@
 .infoContainer div{
     margin: 20px;
 }
+.goLogBox {
+    height: 65vh;
+}
+
+#gologin {
+    border: 1vw outset teal;
+    border-radius: 23%;
+    background-color:rgba(68, 232, 182, 0.5);
+    padding: 5px;
+}
+
+#gologin:hover {
+    border: 1vw outset rgba(68, 232, 190, 0.5)
+}
+
+#gologin:active {
+    border: 1vw inset teal;
+}
+
+#goLogBox {
+    height: 65vh;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    text-align: center;
+}

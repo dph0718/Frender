@@ -1,11 +1,12 @@
 
 #profileForm {
-  position: relative;
+  position: absolute;
   border: 12px gray solid;
   border-radius: 5%;
   width: 50vw;
-  height: 45vw;
+  height: 65vh;
   top: 28px;
+  left: 40%;
   padding: 5%;
   text-align: left;
   background-color: rgba(68, 232, 182, 0.5);
@@ -22,7 +23,7 @@
   border: 12px gray solid;
   border-radius: 5%;
   width: 50vw;
-  height: 45vw;
+  height: 65vh;
   top: 28px;
   left: 40%;
   padding: 5%;

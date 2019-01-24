@@ -20,7 +20,7 @@ componentWillMount(){
     (r) => {
       if (r == "negativeGhostRider") {
         //Turn this back on when log in is needed.
-        // this.setState({ redirect: true })
+        this.setState({ redirect: true })
       } 
     });
 

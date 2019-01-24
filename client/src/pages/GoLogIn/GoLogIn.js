@@ -15,9 +15,9 @@ class GoLogIn extends Component {
     return (
       <div className="fullPage"
         style={divStyle}>
-        <div className="infoContainer">
+        <div className="infoContainer" id="goLogBox">
           <h1>If you were logged in, you would be seeing something more useful. </h1>
-          <Link to="/login">
+          <Link to="/login" id="gologin">
             <h2>Go Log In!</h2>
           </ Link>
         </div>

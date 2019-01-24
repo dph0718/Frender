@@ -97,10 +97,41 @@ class Login extends Component {
   };
 
   render() {
+    let passMatchStyle = {
+      opacity: this.state.passMatchOpac,
+      textShadow: `0px 0px 0px rgba(254, 0, 0, 0.5)`,
+      color: 'green',
+    }
+    let passMatchMessage = "George";
+
+
+    //use these if statements to define passMatchStyle & passMatchMessage
+    if (this.state.confirming === true) {
+      if (this.state.password !== this.state.confirmPassword) {
+        if (this.state.passwordsMatch === true) {
+          this.setState({ passwordsMatch: false })
+        }
+        passMatchStyle = { color: 'rgb(63, 0, 0)', textShadow: '0px 0px 2px rgba(254, 0, 0, 1)', opacity: '1' };
+        passMatchMessage = "Passwords do not match."
+      } else {
+        if (this.state.passwordsMatch === false) {
+          this.setState({ passwordsMatch: true })
+        }
+        // noMatchStyle = { color: 'rgb(0, 63, 16)', textShadow: '0px 0px 5px rgba(50, 205, 50, 0.5', opacity: '1' }
+        passMatchStyle = { color: 'rgb(0, 63, 16)', textShadow: '0px 0px 10px rgba(50, 205, 50, 1', opacity: '1' }
+        passMatchMessage = "You're good to go! Click 'sign up' again to register."
+      }
+
+    } else {
+      passMatchStyle = { opacity: '0' };
+      passMatchMessage = null;
+    };
+
     let formStyle = {
       backgroundImage: 'url(/images/backstagepass.png)',
       bottom: this.state.bottom,
     }
+
 
     // this message element shows up when user is registering
     // displays if the passwords match or not.
@@ -111,40 +142,30 @@ class Login extends Component {
           if (this.state.passwordsMatch === true) {
             this.setState({ passwordsMatch: false })
           }
-          noMatchStyle = {color: 'rgb(63, 0, 0)', textShadow: '0px 0px 5px rgba(254, 0, 0, 0.5)'}
-          return <p style={noMatchStyle}>Passwords do not match.</p>
+          noMatchStyle = { color: 'rgb(63, 0, 0)', textShadow: '0px 0px 5px rgba(254, 0, 0, 0.5)', opacity: '1' }
+          return <p id="passMessage" style={noMatchStyle}>Passwords do not match.</p>
         } else {
           if (this.state.passwordsMatch === false) {
             this.setState({ passwordsMatch: true })
           }
-          noMatchStyle = {color: 'rgb(0, 63, 16)', textShadow: '0px 0px 5px rgba(50, 205, 50, 0.5'}
-          return <p style={noMatchStyle}>You're good to go! Click 'sign up' again to register.</p>
+          noMatchStyle = { color: 'rgb(0, 63, 16)', textShadow: '0px 0px 5px rgba(50, 205, 50, 0.5', opacity: '1' }
+          return <p id="passMessage" style={noMatchStyle}>You're good to go! Click 'sign up' again to register.</p>
         }
 
-        // if (this.state.confirming === true) {
-        //   if (password1 && this.state.email) {
-        //     if (password1 !== password2) {
-        //       return <p>Passwords do not match.</p>
-        //     } else {
-        //       return <p>You're good to go! Click 'sign up' again to register.</p>
-        //     }
-
-        //   } else return null
-        // } else {
-        //   return null;
-        // }
       } else {
-        return null
+        noMatchStyle = { opacity: '0' }
+        return <p id="passMessage" style={noMatchStyle}> boogers</p>
       }
     }
 
-    // If the User is signing up, then the password match confirmation will be visible.
-    let confirmVis = { visibility: 'hidden' };
-    if (this.state.confirming === true) {
-      confirmVis = { visibility: 'visible' }
-    }
 
-    let greenStyle = { backgroundColor: 'green'};
+    // If the User is signing up, then the password match confirmation will be visible.
+    // let confirmVis = { visibility: 'hidden' };
+    let confirmVis = { opacity: 0 };
+    if (this.state.confirming === true) {
+      // confirmVis = { visibility: 'visible' }
+      confirmVis = { opacity: 1 }
+    }
 
 
     //if they have info, Redirect to /home, 
@@ -170,17 +191,20 @@ class Login extends Component {
               <h3>Password</h3>
               <input type='password' className='logInput' name='password' id='password' placeholder="password" />
               <input type='password' className='logInput' onChange={this.checkPasswords} name='confirmPassword' id='confirmPassword' placeholder="Confirm password" style={confirmVis} />
-              <PasswordsNoMatch />
+
+              {/* No to this. Instead, put a div in here with a style variable and each attached to a state. */}
+              <div id='passMatch' style={passMatchStyle}>{passMatchMessage}</div>
+              {/* <PasswordsNoMatch /> */}
             </div>
 
+            <button type='submit' id='loginSubmit'
+              onClick={this.logIn}
+            >Log In</button>
             <p id="signUp">or
         <span
                 // onClick={this.signUp}> sign up.</span>
                 onClick={this.state.passwordsMatch ? this.signUp : this.checkPasswords}> sign up.</span>
             </p>
-            <button type='submit' id='loginSubmit'
-              onClick={this.logIn}
-            >Log In</button>
           </form>
         </div>
       </div>

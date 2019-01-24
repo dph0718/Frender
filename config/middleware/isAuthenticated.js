@@ -7,8 +7,5 @@ module.exports = function(req, res, next) {
 
   console.log('nice try, BOZO')
   // If the user isn't logged in, redirect them to the GoLogIn page
-  // return res.send("negativeGhostRider");
-  return res.send(false);
-  // //test res.end.
-  // return res.send(res.end);
+  res.send("negativeGhostRider");
 };
