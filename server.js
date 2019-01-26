@@ -16,8 +16,10 @@ app.use(passport.initialize());
 app.use(passport.session());
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === "production") {
+  console.log("PRODUCTION from ENV: ")
   app.use(express.static("client/build"));
 } else {
+  console.log("NOT production: using 'public' ")
   app.use(express.static('public'));
 }
 
