@@ -61,7 +61,6 @@ class AmpKnob extends Component {
   render() {
     this.amIActive();
     let style = { transform: `rotate( ${this.state.rotate})` }
-    console.log('rendering an ampknop:', this.state.label)
     return (
       <div className="knobAndLabel" onClick={this.clickFunction}>
         {/* <div className="knobAndLabel" onClick={this.props.pathChange}> */}

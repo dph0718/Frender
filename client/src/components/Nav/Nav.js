@@ -9,7 +9,7 @@ class Nav extends Component {
   state = {
     //whether or not user's logged in; boolean
     loggedIn: this.props.loggedIn,
-    redirect: false,
+    redirect: true,
     activeKnob: this.props.activeKnob,
   };
 
@@ -47,7 +47,7 @@ class Nav extends Component {
 
 
   render() {
-    // console.log('pathChange called because Nav is rendering......')
+    //WWhen the Nav is rendered, immediately checks to see if the pathname 
     this.props.pathChange();
     let loggedIn = this.state.loggedIn;
     console.log(`Nav   ---  this.state.loggedIn:`)

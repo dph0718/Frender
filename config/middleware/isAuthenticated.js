@@ -7,5 +7,8 @@ module.exports = function(req, res, next) {
 
   console.log('nice try, BOZO')
   // If the user isn't logged in, redirect them to the GoLogIn page
-  res.send("negativeGhostRider");
+  // res.send("negativeGhostRider");
+
+  // so the Nav.js won't think we're saying we're logged in.
+  res.send(false);
 };

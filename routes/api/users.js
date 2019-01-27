@@ -4,17 +4,19 @@ const passport = require("../../config/passport");
 const isAuthenticated = require("../../config/middleware/isAuthenticated");
 
 router.get('/', isAuthenticated, (req, res) => {
-    if (!req.user) {
+    // if (!req.user) {
+
         //This will never be called because 
         //if there isn't 
         //isAuthenticated as middleware will 
         //return res.send(false) on this route's behalf.
-        console.log('there was not a user')
-        res.send(false)
-    } else {
+
+    //     console.log('there was not a user')
+    //     res.send(false)
+    // } else {
         console.log('there was a user?')
         res.send(true);
-    }
+    // }
 });
 
 // router.post('/login', passport.authenticate("local"), function (req, res) {
