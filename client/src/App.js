@@ -85,7 +85,11 @@ class App extends Component {
                     <Login {...props}
                       giveState={this.grabLoggedState}
                       loggedIn={this.state.loggedIn} />
-                  </div> : null} />
+                  </div> : <Nav {...props} activeKnob={this.state.activeKnob}
+                  giveState={this.grabLoggedState}
+                  loggedIn={this.state.loggedIn}
+                  pathChange={this.didPathChange}
+/>} />
               <Route exact path="/home" component={Home} />
               <Route exact path="/profile" component={this.state.loggedIn ? ProfileEdit : GoLogIn} />
               <Route exact path="/search" component={this.state.loggedIn ? SearchResults : GoLogIn} />
