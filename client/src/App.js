@@ -8,6 +8,7 @@ import ProfileEdit from "./pages/ProfileEdit";
 import Home from "./pages/Home";
 import API from "./utils/API";
 import GoLogIn from "./pages/GoLogIn/GoLogIn";
+import WaitScreen from "./components/WaitingStaff";
 
 
 const colorStyle = {
@@ -20,6 +21,7 @@ class App extends Component {
   state = {
     loggedIn: false,
     activeKnob: "none",
+    ampImageLoaded: false,
   };
 
   didPathChange = () => {
@@ -41,44 +43,58 @@ class App extends Component {
   componentWillMount() {
     let pathName = (window.location.pathname).replace('/', '');
     this.setState({ activeKnob: pathName })
-    console.log(this.state.activeKnob)
   };
 
-  
-
+  detectLoad = () => {
+    if(this.state.ampImageLoaded === false){
+      this.setState({ampImageLoaded: true})
+    } 
+  }
 
   render() {
 
+    let hidden = { display: 'none' };
+    const Placeholder = () => {
+      if (this.state.ampImageLoaded === false) {
+        return        <WaitScreen />
+          ;
+      } else {
+        return null;
+      }
+    }
+
     return (
-      <Router      >
-        <div style={colorStyle}>
-          <Route path="/"
-            render={props =>
-              <Nav {...props}
-                activeKnob={this.state.activeKnob}
-                giveState={this.grabLoggedState}
-                loggedIn={this.state.loggedIn}
-                pathChange={this.didPathChange}
-              />} />
-          <Switch>
-            <Route exact path="(/|/login)"
+      <div>
+        <img style={hidden} src={"/images/frenderAmp-large.png"} onLoad={this.detectLoad} />
+        <Placeholder />
+        <Router      >
+          <div style={colorStyle}>
+            <Route path="/"
               render={props =>
-                <div>
-                  <Login {...props}
-                    giveState={this.grabLoggedState}
-                    loggedIn={this.state.loggedIn} />
-                </div>} />
-            <Route exact path="/home" component={Home} />
-            <Route exact path="/profile" component={this.state.loggedIn ? ProfileEdit : GoLogIn} />
-            <Route exact path="/search" component={this.state.loggedIn ? SearchResults : GoLogIn} />
-            <Route exact path="/success" component={this.state.loggedIn ? Home : GoLogIn} />
-            <Route exact path="/page/html/search" component={this.state.loggedIn ? Home : GoLogIn} />
-            <Route exact path="/gologin" component={GoLogIn} />
-            <Route component={NoMatch} />
-          </Switch>
-        </div>
-      </Router>
-    )
+                <Nav {...props}
+                  activeKnob={this.state.activeKnob}
+                  giveState={this.grabLoggedState}
+                  loggedIn={this.state.loggedIn}
+                  pathChange={this.didPathChange}
+                />} />
+            <Switch>
+              <Route exact path="(/|/login)"
+                render={props =>
+                  <div>
+                    <Login {...props}
+                      giveState={this.grabLoggedState}
+                      loggedIn={this.state.loggedIn} />
+                  </div>} />
+              <Route exact path="/home" component={Home} />
+              <Route exact path="/profile" component={this.state.loggedIn ? ProfileEdit : GoLogIn} />
+              <Route exact path="/search" component={this.state.loggedIn ? SearchResults : GoLogIn} />
+              <Route exact path="/success" component={this.state.loggedIn ? Home : GoLogIn} />
+              <Route exact path="/page/html/search" component={this.state.loggedIn ? Home : GoLogIn} />
+              <Route exact path="/gologin" component={GoLogIn} />
+              <Route component={NoMatch} />
+            </Switch>
+          </div>
+        </Router>      </div>)
   }
 }
 
