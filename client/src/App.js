@@ -80,12 +80,12 @@ class App extends Component {
                 />} />
             <Switch>
               <Route exact path="(/|/login)"
-                render={props =>
+                render={props => this.state.ampImageLoaded ? 
                   <div>
                     <Login {...props}
                       giveState={this.grabLoggedState}
                       loggedIn={this.state.loggedIn} />
-                  </div>} />
+                  </div> : null} />
               <Route exact path="/home" component={Home} />
               <Route exact path="/profile" component={this.state.loggedIn ? ProfileEdit : GoLogIn} />
               <Route exact path="/search" component={this.state.loggedIn ? SearchResults : GoLogIn} />
