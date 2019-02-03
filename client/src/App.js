@@ -54,6 +54,7 @@ class App extends Component {
   render() {
 
     let hidden = { display: 'none' };
+
     const Placeholder = () => {
       if (this.state.ampImageLoaded === false) {
         return        <WaitScreen />
@@ -64,7 +65,7 @@ class App extends Component {
     }
 
     return (
-      <div>
+      <div style={colorStyle}>
         <img style={hidden} src={"/images/frenderAmp-large.png"} onLoad={this.detectLoad} />
         <Placeholder />
         <Router      >
