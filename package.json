@@ -12,8 +12,7 @@
     "install": "cd client && yarn install",
     "build": "cd client && npm run build",
     "heroku-postbuild": "npm run build",
-    "and-commit": "git commit -m",
-    "blossom": "git add . && yarn and-commit"
+    "blossom": "cd scripts && node blossom.js"
   },
 
   "author": "",
