@@ -46,9 +46,9 @@ class App extends Component {
   };
 
   detectLoad = () => {
-    if(this.state.ampImageLoaded === false){
-      this.setState({ampImageLoaded: true})
-    } 
+    if (this.state.ampImageLoaded === false) {
+      this.setState({ ampImageLoaded: true })
+    }
   }
 
   render() {
@@ -57,7 +57,7 @@ class App extends Component {
 
     const Placeholder = () => {
       if (this.state.ampImageLoaded === false) {
-        return        <WaitScreen />
+        return <WaitScreen />
           ;
       } else {
         return null;
@@ -67,7 +67,6 @@ class App extends Component {
     return (
       <div style={colorStyle}>
         <img style={hidden} src={"/images/frenderAmp-large.png"} onLoad={this.detectLoad} />
-        <Placeholder />
         <Router      >
           <div style={colorStyle}>
             <Route path="/"
@@ -80,16 +79,12 @@ class App extends Component {
                 />} />
             <Switch>
               <Route exact path="(/|/login)"
-                render={props => this.state.ampImageLoaded ? 
+                render={props => this.state.ampImageLoaded ?
                   <div>
                     <Login {...props}
                       giveState={this.grabLoggedState}
                       loggedIn={this.state.loggedIn} />
-                  </div> : <Nav {...props} activeKnob={this.state.activeKnob}
-                  giveState={this.grabLoggedState}
-                  loggedIn={this.state.loggedIn}
-                  pathChange={this.didPathChange}
-/>} />
+                  </div> : null} />
               <Route exact path="/home" component={Home} />
               <Route exact path="/profile" component={this.state.loggedIn ? ProfileEdit : GoLogIn} />
               <Route exact path="/search" component={this.state.loggedIn ? SearchResults : GoLogIn} />
@@ -99,7 +94,10 @@ class App extends Component {
               <Route component={NoMatch} />
             </Switch>
           </div>
-        </Router>      </div>)
+        </Router>
+        <Placeholder />
+
+      </div>)
   }
 }
 

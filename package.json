@@ -11,8 +11,11 @@
     "seed": "node scripts/seedDB.js",
     "install": "cd client && yarn install",
     "build": "cd client && npm run build",
-    "heroku-postbuild": "npm run build"
+    "heroku-postbuild": "npm run build",
+    "and-commit": "git commit -m",
+    "blossom": "git add . && yarn and-commit"
   },
+
   "author": "",
   "license": "ISC",
   "devDependencies": {
